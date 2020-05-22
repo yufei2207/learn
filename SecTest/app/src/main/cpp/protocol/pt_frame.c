@@ -2,12 +2,12 @@
 * Copyright (c) 2012
 * All rights reserved.
 * 
-* Name£º     protocol.c
-* Abstract£º protocol interface
+* Nameï¿½ï¿½     protocol.c
+* Abstractï¿½ï¿½ protocol interface
 * 
-* Version£º 1.0
-* Author£º  yfwang
-* Date£º    2012/03/19
+* Versionï¿½ï¿½ 1.0
+* Authorï¿½ï¿½  yfwang
+* Dateï¿½ï¿½    2012/03/19
 *
 * history   :
 *	     when            who    	          what:
@@ -53,7 +53,7 @@ typedef enum TDataType
     DATA_JT808_DV,
 #endif	 
 }TDataType;
-//Ð­ÒéÕ»²ÎÊý±í
+//Ð­ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 #if	PT_MAX_STACK_NUM > 0
 uchar m_stackBuff[PT_MAX_STACK_NUM][PT_MAX_BUFFER_LEN];
@@ -175,13 +175,13 @@ TStackFunc  m_stackFunc[MAX_STACKTYPE] =
     }\
 }
 //--------------------------------------------------------------------------
-//Ð­ÒéÕ»»ù±¾º¯Êý
+//Ð­ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //--------------------------------------------------------------------------
 /*
-*º¯ÊýÃû³Æ£ºPT_GetDataType
-*º¯ÊýËµÃ÷£º½âÎöÊý¾ÝÀàÐÍ
-*²ÎÊýËµÃ÷£ºnMsgType Ð­ÒéÀàÐÍ
-*·µ»ØÖµ£º  
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_GetDataType
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½nMsgType Ð­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  
 */
 int PT_GetDataType(int nMsgType)
 {
@@ -228,12 +228,12 @@ int PT_GetDataType(int nMsgType)
     return DATA_UNKNOWN;
 }
 /*
-*º¯ÊýÃû³Æ£ºPT_DecodeHead
-*º¯ÊýËµÃ÷£º½âÎöÏûÏ¢ÀàÐÍ
-*²ÎÊýËµÃ÷£ºbuf    ½ÓÊÕÊý¾Ý»º´æ
-*          len    ½ÓÊÕÊý¾Ý³¤¶È
-*          nStackType Ð­ÒéÕ»ÀàÐÍ
-*·µ»ØÖµ£º  -1 ±íÊ¾ÎÞÐ§µÄÏûÏ¢ÀàÐÍ£¬ÆäËû±íÊ¾½âÎöµÄÀàÐÍ
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_DecodeHead
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½buf    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½
+*          len    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý³ï¿½ï¿½ï¿½
+*          nStackType Ð­ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  -1 ï¿½ï¿½Ê¾ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 */
 int PT_DecodeHead(const uchar* buf, int len, int nStackType)
 {
@@ -287,13 +287,13 @@ int PT_DecodeHead(const uchar* buf, int len, int nStackType)
 	return INVALID_TYPE;
 }
 /*
-*º¯ÊýÃû³Æ£ºPT_EncodeHead
-*º¯ÊýËµÃ÷£º±àÂëÐ­ÒéÍ·
-*²ÎÊýËµÃ÷£ºlpBuff    Êý¾Ý»º´æ
-*          nBuffLen  Êý¾Ý»º´æ³¤¶È
-*          bDevice   ÊÇ·ñÉè±¸
-*          nType     ÏûÏ¢ÀàÐÍ
-*·µ»ØÖµ£º  -1 ±íÊ¾Ê§°Ü£¬ÆäËû±íÊ¾±àÂëÊý¾Ý³¤¶È
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_EncodeHead
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½Í·
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½lpBuff    ï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½
+*          nBuffLen  ï¿½ï¿½ï¿½Ý»ï¿½ï¿½æ³¤ï¿½ï¿½
+*          bDevice   ï¿½Ç·ï¿½ï¿½è±¸
+*          nType     ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  -1 ï¿½ï¿½Ê¾Ê§ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý³ï¿½ï¿½ï¿½
 */
 int PT_EncodeHead(uchar *lpBuff, int nBuffLen, char bDevice, int nMsgType)
 {
@@ -309,10 +309,10 @@ int PT_EncodeHead(uchar *lpBuff, int nBuffLen, char bDevice, int nMsgType)
     return RESULT_INVILID_TYPE;
 }
 /*
-*º¯ÊýÃû³Æ£ºPT_GetEncoder
-*º¯ÊýËµÃ÷£º¸ù¾ÝÏûÏ¢ÀàÐÍ»ñÈ¡ÏàÓ¦µÄ±àÂëº¯Êý
-*²ÎÊýËµÃ÷£ºnType ÏûÏ¢ÀàÐÍ
-*·µ»ØÖµ£º  NULL ±íÊ¾ÎÞ±àÂëº¯Êý£¬ÆäËû±íÊ¾±àÂëº¯ÊýÖ¸Õë
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_GetEncoder
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Í»ï¿½È¡ï¿½ï¿½Ó¦ï¿½Ä±ï¿½ï¿½ëº¯ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½nType ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  NULL ï¿½ï¿½Ê¾ï¿½Þ±ï¿½ï¿½ëº¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ëº¯ï¿½ï¿½Ö¸ï¿½ï¿½
 */
 FUNC_ENCODER PT_GetEncoder(int nMsgType)
 {
@@ -339,10 +339,10 @@ FUNC_ENCODER PT_GetEncoder(int nMsgType)
     return NULL;
 }
 /*
-*º¯ÊýÃû³Æ£ºPT_GetDecoder
-*º¯ÊýËµÃ÷£º¸ù¾ÝÏûÏ¢ÀàÐÍ»ñÈ¡ÏàÓ¦µÄ½âÂëº¯Êý
-*²ÎÊýËµÃ÷£ºnType ÏûÏ¢ÀàÐÍ
-*·µ»ØÖµ£º  NULL ±íÊ¾ÎÞ½âÂëº¯Êý£¬ÆäËû±íÊ¾½âÂëº¯ÊýÖ¸Õë
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_GetDecoder
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Í»ï¿½È¡ï¿½ï¿½Ó¦ï¿½Ä½ï¿½ï¿½ëº¯ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½nType ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  NULL ï¿½ï¿½Ê¾ï¿½Þ½ï¿½ï¿½ëº¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ëº¯ï¿½ï¿½Ö¸ï¿½ï¿½
 */
 FUNC_DECODER PT_GetDecoder(int nMsgType)
 {
@@ -389,10 +389,10 @@ FUNC_DECODER PT_GetDecoder(int nMsgType)
     return NULL;  
 }
 /*
-*º¯ÊýÃû³Æ£ºPT_InitLib
-*º¯ÊýËµÃ÷£º³õÊ¼»¯Ð­ÒéÕ»
-*²ÎÊýËµÃ÷£ºÎÞ
-*·µ»ØÖµ£º  ÎÞ
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_InitLib
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½Ð­ï¿½ï¿½Õ»
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  ï¿½ï¿½
 */
 void  PT_InitLib(void)
 {
@@ -405,10 +405,10 @@ void  PT_InitLib(void)
 #endif
 }
 /*
-*º¯ÊýÃû³Æ£ºPT_Initialize
-*º¯ÊýËµÃ÷£º³õÊ¼»¯Ð­ÒéÕ»²ÎÊý
-*²ÎÊýËµÃ÷£ºnStackType Ð­ÒéÕ»ÀàÐÍ
-*·µ»ØÖµ£º  -1 ±íÊ¾Ð­ÒéÕ»Êý²»×ã£¬ÆäËû±íÊ¾Õ»ID
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_Initialize
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½Ð­ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½nStackType Ð­ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  -1 ï¿½ï¿½Ê¾Ð­ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½ã£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾Õ»ID
 */
 int  PT_Initialize(int nStackType)
 {
@@ -416,7 +416,7 @@ int  PT_Initialize(int nStackType)
 	int i =0;
 	for(; i < PT_MAX_STACK_NUM; i++)
 	{
-		if (m_stackParam[i].fnRecv == NULL)//ÅÐ¶Ïµ±Ç°Õ»ÊÇ·ñÒÑ·ÖÅä
+		if (m_stackParam[i].fnRecv == NULL)//ï¿½Ð¶Ïµï¿½Ç°Õ»ï¿½Ç·ï¿½ï¿½Ñ·ï¿½ï¿½ï¿½
 		{
             m_stackParam[i].nStackType = nStackType;
             m_stackParam[i].RecvBuff = m_stackBuff[i];
@@ -436,10 +436,10 @@ int  PT_Initialize(int nStackType)
 	return RESULT_ERROR;
 }
 /*
-*º¯ÊýÃû³Æ£ºPT_InitializeEx
-*º¯ÊýËµÃ÷£º³õÊ¼»¯Ð­ÒéÕ»
-*²ÎÊýËµÃ÷£ºpParam Ð­Òé½ÓÊÕÕ»Ö¸Õë
-*·µ»ØÖµ£º  -1 ±íÊ¾Ð­ÒéÕ»Êý²»×ã£¬ÆäËû±íÊ¾Õ»ID
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_InitializeEx
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½Ð­ï¿½ï¿½Õ»
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½pParam Ð­ï¿½ï¿½ï¿½ï¿½ï¿½Õ»Ö¸ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  -1 ï¿½ï¿½Ê¾Ð­ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½ã£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾Õ»ID
 */
 int  PT_InitializeEx(TStackParam *pParam)
 {
@@ -500,10 +500,10 @@ int  PT_InitializeEx(TStackParam *pParam)
 	return RESULT_ERROR;
 }
 /*
-*º¯ÊýÃû³Æ£ºPT_Uninitialize
-*º¯ÊýËµÃ÷£ºÊÍ·ÅÐ­ÒéÕ»
-*²ÎÊýËµÃ÷£ºnStackID Õ»ID
-*·µ»ØÖµ£º  ÎÞ
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_Uninitialize
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½Ð­ï¿½ï¿½Õ»
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½nStackID Õ»ID
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  ï¿½ï¿½
 */
 void PT_Uninitialize(int nStackID)
 {
@@ -516,10 +516,10 @@ void PT_Uninitialize(int nStackID)
 }
 
 /*
-*º¯ÊýÃû³Æ£ºPT_UninitializeEx
-*º¯ÊýËµÃ÷£ºÊÍ·ÅÐ­ÒéÕ»
-*²ÎÊýËµÃ÷£ºpParam Ð­Òé½ÓÊÕÕ»Ö¸Õë
-*·µ»ØÖµ£º  ÎÞ
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_UninitializeEx
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½Ð­ï¿½ï¿½Õ»
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½pParam Ð­ï¿½ï¿½ï¿½ï¿½ï¿½Õ»Ö¸ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  ï¿½ï¿½
 */
 void PT_UninitializeEx(TStackParam *pParam)
 {
@@ -533,20 +533,20 @@ void PT_UninitializeEx(TStackParam *pParam)
     }
 }
 /*
-*º¯ÊýÃû³Æ£ºPT_GetRecvData
-*º¯ÊýËµÃ÷£º»ñÈ¡½ÓÊÕ»º´æµÄÊý¾Ý
-*²ÎÊýËµÃ÷£ºlpBuff   Êý¾Ý»º´æÖ¸Õë
-*          nBuffLen Êý¾Ý»º´æ³¤¶È
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_GetRecvData
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½lpBuff   ï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½
+*          nBuffLen ï¿½ï¿½ï¿½Ý»ï¿½ï¿½æ³¤ï¿½ï¿½
 *          nStackID Õ»ID
-*·µ»ØÖµ£º  0 ±íÊ¾½âÂë³É¹¦£¬ÆäËû±íÊ¾Ê§°Ü
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  0 ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾Ê§ï¿½ï¿½
 */
 int PT_GetRecvData(uchar *lpBuff, int nBuffLen, int nStackID)
 {
 #if PT_MAX_STACK_NUM > 0
-    if (nStackID < 0 && nStackID >= PT_MAX_STACK_NUM)//ÎÞÐ§µÄÕ»ID
+    if (nStackID < 0 && nStackID >= PT_MAX_STACK_NUM)//ï¿½ï¿½Ð§ï¿½ï¿½Õ»ID
         return RESULT_ERROR;
 
-    if (m_stackParam[nStackID].bRecvFrame == 0)//Î´½ÓÊÕµ½ÍêÕûµÄÖ¡
+    if (m_stackParam[nStackID].bRecvFrame == 0)//Î´ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¡
         return RESULT_ERROR;
 
     if (nBuffLen >= m_stackParam[nStackID].nFrameLen)
@@ -559,22 +559,22 @@ int PT_GetRecvData(uchar *lpBuff, int nBuffLen, int nStackID)
     return RESULT_ERROR;
 }
 /*
-*º¯ÊýÃû³Æ£ºBD1_RecvData
-*º¯ÊýËµÃ÷£º½âÂë½ÓÊÕµÄÊý¾ÝÖÁÐ­ÒéÊý¾Ý½á¹¹
-*²ÎÊýËµÃ÷£ºnStackID Õ»ID
-*          data     ½ÓÊÕµÄÊý¾Ý
-*·µ»ØÖµ£º  -1 ±íÊ¾Ã»ÓÐÊÕµ½ÕûÖ¡Êý¾Ý£¬ÆäËû±íÊ¾Ëù½ÓÊÕÖ¡Êý¾ÝµÄÏûÏ¢ÀàÐÍ
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½BD1_RecvData
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½Ý½á¹¹
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½nStackID Õ»ID
+*          data     ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  -1 ï¿½ï¿½Ê¾Ã»ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½Ýµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
 */
 int  PT_RecvData_ASCII(TStackParam *pParam, uchar data)
 {
     int nRet = RESULT_ERROR;
     if (pParam->nRecvLen == 0)
     {
-        if (data == '$')//ÊÕµ½Ö¡Í·
+        if (data == '$')//ï¿½Õµï¿½Ö¡Í·
         {
             pParam->RecvBuff[0] = data;
             
-            pParam->nRecvLen = 1;//¿ªÊ¼Êý¾Ý½ÓÊÕ
+            pParam->nRecvLen = 1;//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Ý½ï¿½ï¿½ï¿½
             pParam->bRecvFrame = 0;
             pParam->nCRCValue = 0;
             pParam->bCRC = 1;
@@ -601,7 +601,7 @@ int  PT_RecvData_ASCII(TStackParam *pParam, uchar data)
             {
                 pParam->nRecvLen = 0;
             }
-            else if (nRet > 0) //ÊÕµ½ÍêÕûÖ¡
+            else if (nRet > 0) //ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½Ö¡
             {
                 pParam->nRecvLen = 0;
                 return nRet;
@@ -612,28 +612,28 @@ int  PT_RecvData_ASCII(TStackParam *pParam, uchar data)
     return RESULT_ERROR;
 }
 /*
-*º¯ÊýÃû³Æ£ºPT_RecvData_ASCII_Ex
-*º¯ÊýËµÃ÷£º½âÂë½ÓÊÕµÄÊý¾ÝÖÁÐ­ÒéÊý¾Ý½á¹¹
-*²ÎÊýËµÃ÷£ºnStackID Õ»ID
-*          data     ½ÓÊÕµÄÊý¾Ý
-*·µ»ØÖµ£º  -1 ±íÊ¾Ã»ÓÐÊÕµ½ÕûÖ¡Êý¾Ý£¬ÆäËû±íÊ¾Ëù½ÓÊÕÖ¡Êý¾ÝµÄÏûÏ¢ÀàÐÍ
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_RecvData_ASCII_Ex
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½Ý½á¹¹
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½nStackID Õ»ID
+*          data     ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  -1 ï¿½ï¿½Ê¾Ã»ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½Ýµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
 */
 int  PT_RecvData_ASCII_Ex(TStackParam *pParam, uchar data)
 {
-    char szCRC[4];//±±¶·¶þ´úÐ£Ñé×Ö·û´®±È½Ï
+    char szCRC[4];//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½È½ï¿½
     char *pszCRC = NULL;
 
     //if (data == ',' && pParam->RecvBuff[pParam->nRecvLen - 2] == ',')
     //{
-    //    pParam->RecvBuff[pParam->nRecvLen - 1] = ' ';//Á¬Ðø¶ººÅ¼äÔö¼Ó¿Õ¸ñ±ãÓÚºóÐø½âÂëÊ¹ÓÃsscanfº¯Êý
+    //    pParam->RecvBuff[pParam->nRecvLen - 1] = ' ';//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¼ï¿½ï¿½ï¿½ï¿½Ó¿Õ¸ï¿½ï¿½ï¿½Úºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½sscanfï¿½ï¿½ï¿½ï¿½
     //    pParam->RecvBuff[pParam->nRecvLen++] = data;
-    //    if (pParam->nRecvLen >= pParam->nRecvBuffLen)//½ÓÊÕÒç³ö
+    //    if (pParam->nRecvLen >= pParam->nRecvBuffLen)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     //    {
     //        return RESULT_ERROR;
     //    }
     //}
     //else 
-    if (data == '*')//Í£Ö¹¼ÆËãÐ£Ñé
+    if (data == '*')//Í£Ö¹ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½
     {
         pParam->bCRC = 0;
     }
@@ -643,15 +643,15 @@ int  PT_RecvData_ASCII_Ex(TStackParam *pParam, uchar data)
         pParam->nCRCValue ^= data;
     }
 
-    if (data == 0x0A && pParam->RecvBuff[pParam->nRecvLen - 2] == 0x0D)//±¾Ö¡½ÓÊÕÍê³É
+    if (data == 0x0A && pParam->RecvBuff[pParam->nRecvLen - 2] == 0x0D)//ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     {
         pParam->nCRCValue ^= PT_MakeCRC(pParam->RecvBuff + 1, 5);
-        //¼ÆËãÐ£Ñé
+        //ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½
         sprintf(szCRC, "%02X", pParam->nCRCValue & 0xFF);
         pszCRC = &(pParam->RecvBuff[pParam->nRecvLen - 4]);
 		pszCRC[0] = toupper(pszCRC[0]);
 		pszCRC[1] = toupper(pszCRC[1]);
-        if (strncmp(szCRC, pszCRC, 2) == 0)//Ð£ÑéÕýÈ·
+        if (strncmp(szCRC, pszCRC, 2) == 0)//Ð£ï¿½ï¿½ï¿½ï¿½È·
         {
             pParam->nFrameLen = pParam->nRecvLen;
             pParam->RecvBuff[pParam->nRecvLen] = 0;
@@ -664,7 +664,7 @@ int  PT_RecvData_ASCII_Ex(TStackParam *pParam, uchar data)
             return RESULT_ERROR;
         }
     }
-    else if (pParam->nRecvLen >= pParam->nRecvBuffLen)//½ÓÊÕÒç³ö
+    else if (pParam->nRecvLen >= pParam->nRecvBuffLen)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     {
         return RESULT_ERROR;
     }
@@ -672,11 +672,11 @@ int  PT_RecvData_ASCII_Ex(TStackParam *pParam, uchar data)
     return RESULT_SUCCESS;
 }
 /*
-*º¯ÊýÃû³Æ£ºPT_RecvData_MIX
-*º¯ÊýËµÃ÷£º½ÓÊÕµÄ»ìºÏÐ­ÒéÊý¾Ý
-*²ÎÊýËµÃ÷£ºpParam   Õ»²ÎÊýÖ¸Õë
-*          data     ½ÓÊÕµÄÊý¾Ý
-*·µ»ØÖµ£º  -1 ±íÊ¾Ã»ÓÐÊÕµ½ÕûÖ¡Êý¾Ý£¬ÆäËû±íÊ¾Ëù½ÓÊÕÖ¡Êý¾ÝµÄÏûÏ¢ÀàÐÍ
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_RecvData_MIX
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÕµÄ»ï¿½ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½pParam   Õ»ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½
+*          data     ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  -1 ï¿½ï¿½Ê¾Ã»ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½Ýµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
 */
 int  PT_RecvData_MIX(TStackParam *pParam, uchar data)
 {
@@ -692,14 +692,14 @@ int  PT_RecvData_MIX(TStackParam *pParam, uchar data)
             pParam->nRecvFlag = DATA_UNKNOWN;
             pParam->nRecvLen = 0;
         }
-        else if (nRet > 0) //ÊÕµ½ÍêÕûÖ¡
+        else if (nRet > 0) //ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½Ö¡
         {
             pParam->nRecvFlag = DATA_UNKNOWN;
             pParam->nRecvLen = 0;
             return nRet;
         }
     }
-    else if (pParam->nRecvLen >= 6)//¼ì²âÖ¡Í·£¬Ò»´ú5×Ö½Ú£¬¶þ´ú6×Ö½Ú
+    else if (pParam->nRecvLen >= 6)//ï¿½ï¿½ï¿½Ö¡Í·ï¿½ï¿½Ò»ï¿½ï¿½5ï¿½Ö½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½6ï¿½Ö½ï¿½
     {
         ptr = pParam->RecvBuff + pParam->nRecvLen - 6;
         pParam->nMsgType = PT_DecodeHead(ptr, 6, pParam->nStackType);
@@ -708,7 +708,7 @@ int  PT_RecvData_MIX(TStackParam *pParam, uchar data)
             pParam->nRecvFlag = PT_GetDataType(pParam->nMsgType);
             if (pParam->nRecvFlag != DATA_UNKNOWN)
             {
-                if (m_stackFunc[pParam->nRecvFlag].fnRecvData)//¿ªÊ¼Êý¾Ý½ÓÊÕ
+                if (m_stackFunc[pParam->nRecvFlag].fnRecvData)//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Ý½ï¿½ï¿½ï¿½
                 {
                     pParam->bRecvFrame = 0;
                     pParam->nCRCValue = 0;
@@ -724,22 +724,22 @@ int  PT_RecvData_MIX(TStackParam *pParam, uchar data)
             }
         }
 
-        if (pParam->nRecvLen >= pParam->nRecvBuffLen)//½ÓÊÕÒç³ö
+        if (pParam->nRecvLen >= pParam->nRecvBuffLen)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         {
             memcpy(pParam->RecvBuff, ptr, 5);
             pParam->nRecvLen = 5;
-            pParam->nRecvFlag = DATA_UNKNOWN;//½áÊø±¾Ö¡½ÓÊÕ
+            pParam->nRecvFlag = DATA_UNKNOWN;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½ï¿½
         }
     }
 
     return RESULT_ERROR;
 }
 /*
-*º¯ÊýÃû³Æ£ºPT_RecvData
-*º¯ÊýËµÃ÷£º½âÂë½ÓÊÕµÄÊý¾ÝÖÁÐ­ÒéÊý¾Ý½á¹¹
-*²ÎÊýËµÃ÷£ºnStackID Õ»ID
-*          data     ½ÓÊÕµÄÊý¾Ý
-*·µ»ØÖµ£º  -1 ±íÊ¾Ã»ÓÐÊÕµ½ÕûÖ¡Êý¾Ý£¬ÆäËû±íÊ¾Ëù½ÓÊÕÖ¡Êý¾ÝµÄÏûÏ¢ÀàÐÍ
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_RecvData
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½Ý½á¹¹
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½nStackID Õ»ID
+*          data     ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  -1 ï¿½ï¿½Ê¾Ã»ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½Ýµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
 */
 int  PT_RecvData(int nStackID, uchar data)
 {
@@ -754,11 +754,11 @@ int  PT_RecvData(int nStackID, uchar data)
     return RESULT_ERROR;
 }
 /*
-*º¯ÊýÃû³Æ£ºPT_RecvDataEx
-*º¯ÊýËµÃ÷£º½ÓÊÕÊý¾Ý
-*²ÎÊýËµÃ÷£ºpParam   Õ»²ÎÊýÖ¸Õë
-*          data     ½ÓÊÕµÄÊý¾Ý
-*·µ»ØÖµ£º  -1 ±íÊ¾Ã»ÓÐÊÕµ½ÕûÖ¡Êý¾Ý£¬ÆäËû±íÊ¾Ëù½ÓÊÕÖ¡Êý¾ÝµÄÏûÏ¢ÀàÐÍ
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_RecvDataEx
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½pParam   Õ»ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½
+*          data     ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  -1 ï¿½ï¿½Ê¾Ã»ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½Ýµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
 */
 int  PT_RecvDataEx(TStackParam *pParam, uchar data)
 {
@@ -771,11 +771,11 @@ int  PT_RecvDataEx(TStackParam *pParam, uchar data)
 }
 
 /*
-*º¯ÊýÃû³Æ£ºPT_DecodeRecvData
-*º¯ÊýËµÃ÷£º½âÂë½ÓÊÕµÄÊý¾ÝÖÁÐ­ÒéÊý¾Ý½á¹¹
-*²ÎÊýËµÃ÷£ºpPackage ½á¹¹ÌåÖ¸Õë
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_DecodeRecvData
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½Ý½á¹¹
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½pPackage ï¿½á¹¹ï¿½ï¿½Ö¸ï¿½ï¿½
 *          nStackID Õ»ID
-*·µ»ØÖµ£º  0 ±íÊ¾½âÂë³É¹¦£¬ÆäËû±íÊ¾Ê§°Ü
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  0 ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾Ê§ï¿½ï¿½
 */
 int PT_DecodeRecvData(void *pPackage, int nStackID)
 {
@@ -789,18 +789,18 @@ int PT_DecodeRecvData(void *pPackage, int nStackID)
     return nRet;
 }
 /*
-*º¯ÊýÃû³Æ£ºPT_DecodeRecvDataEx
-*º¯ÊýËµÃ÷£º½âÂëÐ­ÒéÕ»½ÓÊÕµÄÊý¾ÝÖÁÐ­ÒéÊý¾Ý½á¹¹
-*²ÎÊýËµÃ÷£ºpPackage ½á¹¹ÌåÖ¸Õë
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_DecodeRecvDataEx
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½Õ»ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½Ý½á¹¹
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½pPackage ï¿½á¹¹ï¿½ï¿½Ö¸ï¿½ï¿½
 *          nStackID Õ»ID
-*·µ»ØÖµ£º  0 ±íÊ¾½âÂë³É¹¦£¬ÆäËû±íÊ¾Ê§°Ü
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  0 ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾Ê§ï¿½ï¿½
 */
 int PT_DecodeRecvDataEx(void *pPackage, TStackParam *pParam)
 {
     int nDataType;
     FUNC_DECODER fnDecoder = NULL;
 
-    if (pParam->bRecvFrame == 0)//Î´½ÓÊÕµ½ÍêÕûµÄÖ¡
+    if (pParam->bRecvFrame == 0)//Î´ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¡
         return RESULT_ERROR;
 
     nDataType = PT_GetDataType(pParam->nMsgType);
@@ -846,25 +846,25 @@ int PT_EncodeRecvDataEx(void *pPackage, TStackParam *pParam)
     return -1;
 }
 /*
-*º¯ÊýÃû³Æ£ºPT_DecodeType
-*º¯ÊýËµÃ÷£º½âÂë½ÓÊÕµ½ÕûÖ¡Êý¾ÝµÄÏûÏ¢ÀàÐÍ
-*²ÎÊýËµÃ÷£ºbuf    ½ÓÊÕÊý¾Ý»º´æ
-*          len    ½ÓÊÕÊý¾Ý³¤¶È
-*          nStackType Ð­ÒéÕ»ÀàÐÍ
-*·µ»ØÖµ£º  -1 ±íÊ¾ÎÞÐ§µÄÏûÏ¢ÀàÐÍ£¬ÆäËû±íÊ¾½âÎöµÄÀàÐÍ
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_DecodeType
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½Ýµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½buf    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½
+*          len    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý³ï¿½ï¿½ï¿½
+*          nStackType Ð­ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  -1 ï¿½ï¿½Ê¾ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 */
 int PT_DecodeType(const uchar* lpBuff, int nBuffLen, int nStackType)
 {
     return PT_DecodeHead(lpBuff, nBuffLen, nStackType);
 }
 /*
-*º¯ÊýÃû³Æ£ºPT_DecodePackage
-*º¯ÊýËµÃ÷£º½âÂë½ÓÊÕÕûÖ¡Êý¾ÝÖÁÐ­ÒéÊý¾Ý½á¹¹
-*²ÎÊýËµÃ÷£ºpPackage  Êý¾Ý½á¹¹Ö¸Õë
-*          lpBuff    Êý¾Ý»º´æ
-*          nBuffLen  Êý¾Ý»º´æ³¤¶È
-*          nStackType Ð­ÒéÕ»ÀàÐÍ
-*·µ»ØÖµ£º  0 ±íÊ¾½âÂë³É¹¦£¬ÆäËû±íÊ¾Ê§°Ü
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_DecodePackage
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½Ý½á¹¹
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½pPackage  ï¿½ï¿½ï¿½Ý½á¹¹Ö¸ï¿½ï¿½
+*          lpBuff    ï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½
+*          nBuffLen  ï¿½ï¿½ï¿½Ý»ï¿½ï¿½æ³¤ï¿½ï¿½
+*          nStackType Ð­ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  0 ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾Ê§ï¿½ï¿½
 */
 int PT_DecodePackage_ASCII(void *pPackage, int nMsgType, uchar *lpBuff, int nBuffLen)
 {
@@ -904,7 +904,7 @@ int PT_DecodePackage_ASCII(void *pPackage, int nMsgType, uchar *lpBuff, int nBuf
         sprintf(szCRC, "%02X", nCRC & 0xFF);
 		pCRC[0] = toupper(pCRC[0]);
 		pCRC[1] = toupper(pCRC[1]);
-        if (strncmp(szCRC, pCRC, 2) == 0)//Ð£ÑéÕýÈ·
+        if (strncmp(szCRC, pCRC, 2) == 0)//Ð£ï¿½ï¿½ï¿½ï¿½È·
         {
             return fnDecoder(pPackage, lpBuff, nFrameLen);
         }
@@ -913,13 +913,13 @@ int PT_DecodePackage_ASCII(void *pPackage, int nMsgType, uchar *lpBuff, int nBuf
     return RESULT_ERROR;
 }
 /*
-*º¯ÊýÃû³Æ£ºPT_DecodePackage
-*º¯ÊýËµÃ÷£º½âÂë½ÓÊÕÕûÖ¡Êý¾ÝÖÁÐ­ÒéÊý¾Ý½á¹¹
-*²ÎÊýËµÃ÷£ºpPackage  Êý¾Ý½á¹¹Ö¸Õë
-*          lpBuff    Êý¾Ý»º´æ
-*          nBuffLen  Êý¾Ý»º´æ³¤¶È
-*          nStackType Ð­ÒéÕ»ÀàÐÍ
-*·µ»ØÖµ£º  0 ±íÊ¾½âÂë³É¹¦£¬ÆäËû±íÊ¾Ê§°Ü
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_DecodePackage
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½Ý½á¹¹
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½pPackage  ï¿½ï¿½ï¿½Ý½á¹¹Ö¸ï¿½ï¿½
+*          lpBuff    ï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½
+*          nBuffLen  ï¿½ï¿½ï¿½Ý»ï¿½ï¿½æ³¤ï¿½ï¿½
+*          nStackType Ð­ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  0 ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾Ê§ï¿½ï¿½
 */
 int PT_DecodePackage(void *pPackage, uchar *lpBuff, int nBuffLen, int nStackType)
  {
@@ -940,13 +940,13 @@ int PT_DecodePackage(void *pPackage, uchar *lpBuff, int nBuffLen, int nStackType
 }
 
 /*
-*º¯ÊýÃû³Æ£ºPT_EncodePackage_ASCII
-*º¯ÊýËµÃ÷£º±àÂëÊý¾Ý
-*²ÎÊýËµÃ÷£ºlpBuff    Êý¾Ý»º´æ
-*          nBuffLen  Êý¾Ý»º´æ³¤¶È
-*          pMsgData  Ð­ÒéÊý¾Ý½á¹¹Ö¸Õë
-*          bDevice   ÊÇ·ñÉè±¸Õ»£¬Éè±¸Õ»¶þ´úÐ­ÒéÍ·±àÂë"BD"ÓÃ1±íÊ¾£¬PCÕ»±àÂë"CC"ÓÃ0±íÊ¾
-*·µ»ØÖµ£º  -1 ±íÊ¾Ê§°Ü£¬ÆäËû±íÊ¾Êý¾Ý³¤¶È
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_EncodePackage_ASCII
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½lpBuff    ï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½
+*          nBuffLen  ï¿½ï¿½ï¿½Ý»ï¿½ï¿½æ³¤ï¿½ï¿½
+*          pMsgData  Ð­ï¿½ï¿½ï¿½ï¿½ï¿½Ý½á¹¹Ö¸ï¿½ï¿½
+*          bDevice   ï¿½Ç·ï¿½ï¿½è±¸Õ»ï¿½ï¿½ï¿½è±¸Õ»ï¿½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½"BD"ï¿½ï¿½1ï¿½ï¿½Ê¾ï¿½ï¿½PCÕ»ï¿½ï¿½ï¿½ï¿½"CC"ï¿½ï¿½0ï¿½ï¿½Ê¾
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  -1 ï¿½ï¿½Ê¾Ê§ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ý³ï¿½ï¿½ï¿½
 */
 int PT_EncodePackage_ASCII(uchar *lpBuff, int nBuffLen, 
                            void *pPackage, int nMsgType, char bDevice)
@@ -985,7 +985,7 @@ int PT_EncodePackage_ASCII(uchar *lpBuff, int nBuffLen,
     if (nBuffLen < 5)
         return RESULT_ERROR;
 
-    nCRC = PT_MakeCRC(lpBuff + 1, ptr - lpBuff - 1);//Ð£Ñé²»°üº¬Ö¡Í·'$'
+    nCRC = PT_MakeCRC(lpBuff + 1, ptr - lpBuff - 1);//Ð£ï¿½é²»ï¿½ï¿½ï¿½ï¿½Ö¡Í·'$'
 
     nRet = sprintf(ptr, "*%02X\r\n", nCRC);
     ptr += nRet;
@@ -993,13 +993,13 @@ int PT_EncodePackage_ASCII(uchar *lpBuff, int nBuffLen,
     return (ptr - lpBuff);
 }
 /*
-*º¯ÊýÃû³Æ£ºPT_EncodePackage
-*º¯ÊýËµÃ÷£º±àÂëÊý¾Ý
-*²ÎÊýËµÃ÷£ºlpBuff    Êý¾Ý»º´æ
-*          nBuffLen  Êý¾Ý»º´æ³¤¶È
-*          pMsgData  Ð­ÒéÊý¾Ý½á¹¹Ö¸Õë
-*          bDevice   ÊÇ·ñÉè±¸Õ»£¬Éè±¸Õ»¶þ´úÐ­ÒéÍ·±àÂë"BD"ÓÃ1±íÊ¾£¬PCÕ»±àÂë"CC"ÓÃ0±íÊ¾
-*·µ»ØÖµ£º  -1 ±íÊ¾Ê§°Ü£¬ÆäËû±íÊ¾Êý¾Ý³¤¶È
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_EncodePackage
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½lpBuff    ï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½
+*          nBuffLen  ï¿½ï¿½ï¿½Ý»ï¿½ï¿½æ³¤ï¿½ï¿½
+*          pMsgData  Ð­ï¿½ï¿½ï¿½ï¿½ï¿½Ý½á¹¹Ö¸ï¿½ï¿½
+*          bDevice   ï¿½Ç·ï¿½ï¿½è±¸Õ»ï¿½ï¿½ï¿½è±¸Õ»ï¿½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½"BD"ï¿½ï¿½1ï¿½ï¿½Ê¾ï¿½ï¿½PCÕ»ï¿½ï¿½ï¿½ï¿½"CC"ï¿½ï¿½0ï¿½ï¿½Ê¾
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  -1 ï¿½ï¿½Ê¾Ê§ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ý³ï¿½ï¿½ï¿½
 */
 int PT_EncodePackage(uchar *lpBuff, int nBuffLen, 
                        void *pPackage, int nMsgType, char bDevice)
@@ -1018,10 +1018,10 @@ int PT_EncodePackage(uchar *lpBuff, int nBuffLen,
 
 #ifdef WIN32
 /*
-*º¯ÊýÃû³Æ£ºPT_GetPackage
-*º¯ÊýËµÃ÷£º¸ù¾ÝÏûÏ¢ÀàÐÍ»ñÈ¡ÏàÓ¦µÄÊý¾Ý½á¹¹°ü
-*²ÎÊýËµÃ÷£ºnType ÏûÏ¢ÀàÐÍ
-*·µ»ØÖµ£º  NULL ±íÊ¾ÎÞ´ËÀàÐÍÊý¾Ý½á¹¹°ü£¬ÆäËû±íÊ¾Êý¾Ý½á¹¹°üÖ¸Õë£¬½á¹¹Êý¾Ý°üÊ¹ÓÃÍêºóÓ¦µ±ÊÍ·Å¿Õ¼ä
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_GetPackage
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Í»ï¿½È¡ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½Ý½á¹¹ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½nType ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  NULL ï¿½ï¿½Ê¾ï¿½Þ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý½á¹¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ý½á¹¹ï¿½ï¿½Ö¸ï¿½ë£¬ï¿½á¹¹ï¿½ï¿½ï¿½Ý°ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½Í·Å¿Õ¼ï¿½
 */
 void *PT_GetPackage(int nType)
 {

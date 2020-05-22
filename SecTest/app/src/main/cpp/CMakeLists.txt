@@ -17,12 +17,12 @@ add_library( # Sets the name of the library.
              SHARED
 
              # Provides a relative path to your source file(s).
-             native-lib.cpp
+             ./utility/utility.c
+             ./protocol/pt_utility.c
+             ./protocol/pt_frame.c
+             ./protocol/bd2/pt_bd2_rdss.c
              add.cpp
-        utility/utility.c
-        protocol/pt_utility.c
-        protocol/pt_frame.c
-        protocol/bd2/pt_bd2_rdss.c
+             native-lib.cpp
         )
 
 # Searches for a specified prebuilt library and stores the path as a

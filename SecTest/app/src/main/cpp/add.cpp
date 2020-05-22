@@ -48,15 +48,3 @@ int addSTR_POINT(STR_POINT *a){
 	return a->x + a->y;
 }
 
-int* add_return_point(int a, int b){
-	printf("parameter1=%d\n", a);
-	printf("parameter2=%d\n", b);
-
-	int* pHe = new int[1];
-	*pHe = a + b;
-	printf("return=%d\n", *pHe);
-
-	printf("point=%p\n", pHe);
-
-	return pHe;
-}

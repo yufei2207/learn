@@ -2,12 +2,12 @@
 * Copyright (c) 2012
 * All rights reserved.
 * 
-* Name£º     protocol.h
-* Abstract£º protocol interface
+* Nameï¿½ï¿½     protocol.h
+* Abstractï¿½ï¿½ protocol interface
 * 
-* Version£º 1.0
-* Author£º  yfwang
-* Date£º    2012/03/19
+* Versionï¿½ï¿½ 1.0
+* Authorï¿½ï¿½  yfwang
+* Dateï¿½ï¿½    2012/03/19
 *
 * history   :
 *	     when            who    	          what:
@@ -54,32 +54,32 @@ typedef enum TStackType
 
 typedef struct TStackParam
 {
-    int  nStackType; //Ð­ÒéÕ»ÀàÐÍ
-    int  nRecvFlag;  //½ÓÊÕ×´Ì¬
-    char bRecvFrame; //ÊÇ·ñ½ÓÊÕµ½Ò»Ö¡Êý¾Ý
+    int  nStackType; //Ð­ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½
+    int  nRecvFlag;  //ï¿½ï¿½ï¿½ï¿½×´Ì¬
+    char bRecvFrame; //ï¿½Ç·ï¿½ï¿½ï¿½Õµï¿½Ò»Ö¡ï¿½ï¿½ï¿½ï¿½
 
-    short nFrameLen;//Ò»´úÐ­ÒéÒÔ¼°¶þ´úRDÌØÊâÐ­ÒéÖ¡³¤¶È
-    unsigned short nCRCValue;//Ð£Ñé
-    //ÊÇ·ñ¼ÆËãÐ£Ñé
+    short nFrameLen;//Ò»ï¿½ï¿½Ð­ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½RDï¿½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½ï¿½
+    unsigned short nCRCValue;//Ð£ï¿½ï¿½
+    //ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½
     uchar bCRC;
-    //½ÓÊÕbuff
+    //ï¿½ï¿½ï¿½ï¿½buff
     uchar *RecvBuff;
-    //½ÓÊÕ»º´æ³¤¶È
+    //ï¿½ï¿½ï¿½Õ»ï¿½ï¿½æ³¤ï¿½ï¿½
     int   nRecvBuffLen;
-    //½ÓÊÕ×Ö·û¼ÆÊý
+    //ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½
     int   nRecvLen;
-    //Ð­ÒéÀàÐÍ
+    //Ð­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     int   nMsgType;
-    //Êý¾Ý½ÓÊÕº¯ÊýÖ¸Õë
+    //ï¿½ï¿½ï¿½Ý½ï¿½ï¿½Õºï¿½ï¿½ï¿½Ö¸ï¿½ï¿½
     void *fnRecv;
 }TStackParam;
 
-//½âÂëº¯Êý½Ó¿Ú¶¨Òå
+//ï¿½ï¿½ï¿½ëº¯ï¿½ï¿½ï¿½Ó¿Ú¶ï¿½ï¿½ï¿½
 typedef int (*FUNC_DECODER)(void *pPackage, uchar *lpBuff, int nBuffLen);
-//±àÂëº¯Êý½Ó¿Ú¶¨Òå
+//ï¿½ï¿½ï¿½ëº¯ï¿½ï¿½ï¿½Ó¿Ú¶ï¿½ï¿½ï¿½
 typedef int (*FUNC_ENCODER)(uchar *lpBuff, int nBuffLen, void* pPackage);
 
-#include "pt_config.h"  //Ð­ÒéÕ»ÅäÖÃÎÄ¼þ
+#include "pt_config.h"  //Ð­ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
 
 #ifdef PT_ENABLE_BD1
     #include "./bd1/pt_bd1.h"
@@ -125,411 +125,411 @@ typedef enum TProtocolType
 {
     INVALID_TYPE = -1,
     TY_NULL = 0,
-#ifdef PT_ENABLE_BD1   //Ò»´úÐ­Òé£¬ÍâÉèÖÁÓÃ»§»úÐÅÏ¢
+#ifdef PT_ENABLE_BD1   //Ò»ï¿½ï¿½Ð­ï¿½é£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
     BD1_ZERO,
-    BD1_GLJC = BD1_ZERO,//¹¦ÂÊ¼ì²â
-    BD1_DWSQ,      //¶¨Î»ÉêÇë
-    BD1_TXSQ,      //Í¨ÐÅÉêÇë
-    BD1_HXSZ,      //º½ÏßÉèÖÃ
-    BD1_DHSQ,      //µ¼º½ÉêÇë
-    BD1_DSSQ,      //¶¨Ê±ÉêÇë
-    BD1_SCSC,      //Ê±²îÊä³ö
-    BD1_ZBZH,      //×ø±ê×ª»»
-    BD1_JSZL,      //½áÊøÖ¸Áî
-    BD1_GBXX,      //¹ã²¥ÐÅÏ¢
-    BD1_GYXX,      //¹«ÓÃÐÅÏ¢
-    BD1_WMCS,      //ÎóÂë²âÊÔ
-    BD1_CKSC,      //´®¿ÚÊä³ö
-    BD1_ICJC,      //IC¼ì²â
-    BD1_JJZH,      //½ô¼±×Ô»Ù
-    BD1_BSSZ,      //²¨ÊøÉèÖÃ
-    BD1_GXZX,      //¹ÜÐÅ×¢Èë
-    BD1_GXDQ,      //¹ÜÐÅ¶ÁÈ¡
-    BD1_XTZJ,      //ÏµÍ³×Ô¼ì 
-    BD1_LZSZ,      //ÁãÖµÉèÖÃ
-    BD1_LZDQ,      //ÁãÖµ¶ÁÈ¡
-    BD1_SJSC,      //Ê±¼äÊä³ö
-    BD1_BBDQ,      //°æ±¾¶ÁÈ¡
-    BD1_XHDQ,      //ÐòºÅ¶ÁÈ¡
-    BD1_GLZK,      //¹¦ÂÊ×´¿ö//ÓÃ»§»úÖÁÍâÉèÐÅÏ¢
-    BD1_DWXX,      //¶¨Î»ÐÅÏ¢
-    BD1_TXXX,      //Í¨ÐÅÐÅÏ¢
-    BD1_TXHZ,      //Í¨ÐÅ»ØÖ´
-    BD1_KLSB,      //¿ÚÁîÊ¶±ð
-    BD1_DHSC,      //µ¼º½Êä³ö
-    BD1_DSJG,      //¶¨Ê±½á¹û
-    BD1_SCSJ,      //Ê±²îÊý¾Ý
-    BD1_ZBSC,      //×ø±êÊä³ö
-    BD1_GBSC,      //¹ã²¥Êä³ö
-    BD1_GYSC,      //¹«ÓÃÊä³ö
-    BD1_ICXX,      //ICÐÅÏ¢
-    BD1_ZHQR,      //×Ô»ÙÈ·ÈÏ
-    BD1_ZJXX,      //×Ô¼ìÐÅÏ¢
-    BD1_LZXX,      //ÁãÖµÐÅÏ¢
-    BD1_SJXX,      //Ê±¼äÐÅÏ¢
-    BD1_BBXX,      //°æ±¾ÐÅÏ¢
-    BD1_XHXX,      //ÐòºÅÐÅÏ¢
-    BD1_GLXX,      //¹ÜÀíÐÅÏ¢
-    BD1_FKXX,      //·´À¡ÐÅÏ¢
-    BD1_ILXX,      //IÂ·ÐÅÏ¢
-    BD1_QLXX,      //QÂ·ÐÅÏ¢
-    BD1_RZCW,       //×Ô¶¨ÒåÐ­Òé
+    BD1_GLJC = BD1_ZERO,//ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½
+    BD1_DWSQ,      //ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½
+    BD1_TXSQ,      //Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    BD1_HXSZ,      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    BD1_DHSQ,      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    BD1_DSSQ,      //ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
+    BD1_SCSC,      //Ê±ï¿½ï¿½ï¿½ï¿½ï¿½
+    BD1_ZBZH,      //ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½
+    BD1_JSZL,      //ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½
+    BD1_GBXX,      //ï¿½ã²¥ï¿½ï¿½Ï¢
+    BD1_GYXX,      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+    BD1_WMCS,      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    BD1_CKSC,      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    BD1_ICJC,      //ICï¿½ï¿½ï¿½
+    BD1_JJZH,      //ï¿½ï¿½ï¿½ï¿½ï¿½Ô»ï¿½
+    BD1_BSSZ,      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    BD1_GXZX,      //ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½
+    BD1_GXDQ,      //ï¿½ï¿½ï¿½Å¶ï¿½È¡
+    BD1_XTZJ,      //ÏµÍ³ï¿½Ô¼ï¿½ 
+    BD1_LZSZ,      //ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½
+    BD1_LZDQ,      //ï¿½ï¿½Öµï¿½ï¿½È¡
+    BD1_SJSC,      //Ê±ï¿½ï¿½ï¿½ï¿½ï¿½
+    BD1_BBDQ,      //ï¿½æ±¾ï¿½ï¿½È¡
+    BD1_XHDQ,      //ï¿½ï¿½Å¶ï¿½È¡
+    BD1_GLZK,      //ï¿½ï¿½ï¿½ï¿½×´ï¿½ï¿½//ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+    BD1_DWXX,      //ï¿½ï¿½Î»ï¿½ï¿½Ï¢
+    BD1_TXXX,      //Í¨ï¿½ï¿½ï¿½ï¿½Ï¢
+    BD1_TXHZ,      //Í¨ï¿½Å»ï¿½Ö´
+    BD1_KLSB,      //ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½
+    BD1_DHSC,      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    BD1_DSJG,      //ï¿½ï¿½Ê±ï¿½ï¿½ï¿½
+    BD1_SCSJ,      //Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    BD1_ZBSC,      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    BD1_GBSC,      //ï¿½ã²¥ï¿½ï¿½ï¿½
+    BD1_GYSC,      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    BD1_ICXX,      //ICï¿½ï¿½Ï¢
+    BD1_ZHQR,      //ï¿½Ô»ï¿½È·ï¿½ï¿½
+    BD1_ZJXX,      //ï¿½Ô¼ï¿½ï¿½ï¿½Ï¢
+    BD1_LZXX,      //ï¿½ï¿½Öµï¿½ï¿½Ï¢
+    BD1_SJXX,      //Ê±ï¿½ï¿½ï¿½ï¿½Ï¢
+    BD1_BBXX,      //ï¿½æ±¾ï¿½ï¿½Ï¢
+    BD1_XHXX,      //ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+    BD1_GLXX,      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+    BD1_FKXX,      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+    BD1_ILXX,      //IÂ·ï¿½ï¿½Ï¢
+    BD1_QLXX,      //QÂ·ï¿½ï¿½Ï¢
+    BD1_RZCW,       //ï¿½Ô¶ï¿½ï¿½ï¿½Ð­ï¿½ï¿½
     BD1_BJLZ,
-    BD1_DQGK,      //¶ÁÈ¡¹¦¿ö
-    BD1_BHXX,      //²¶»ñÐÅÏ¢
-    BD1_SSXX,      //ÊÚÊ±ÐÅÏ¢
+    BD1_DQGK,      //ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
+    BD1_BHXX,      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+    BD1_SSXX,      //ï¿½ï¿½Ê±ï¿½ï¿½Ï¢
     BD1_KZXX,      //
     BD1_DSXX,      
     BD1_SZXX,
     BD1_DSLX,
     BD1_BJWZ,
     BD1_FPGA,
-    BD1_BDSZ,      //µçÁ¦ÉèÖÃÐÅÏ¢
-    BD1_LAST = BD1_BDSZ, //Ò»´úÐ­Òé½áÊø
+    BD1_BDSZ,      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+    BD1_LAST = BD1_BDSZ, //Ò»ï¿½ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½
 #endif//PT_ENABLE_BD1
-#ifdef PT_ENABLE_BD2_RN   //¶þ´úRNSSÐ­Òé
+#ifdef PT_ENABLE_BD2_RN   //ï¿½ï¿½ï¿½ï¿½RNSSÐ­ï¿½ï¿½
     BD2_RN_ZERO,
-    BD2_RN_AAM = BD2_RN_ZERO,//º½Â·µãµ½´ï±¨¾¯
-    BD2_RN_ALM,//ÎÀÐÇÀúÊéÊý¾Ý
-    BD2_RN_APL,//ÍêºÃÐÔ±£»¤ÃÅÏÞ
-    BD2_RN_BSD,//ÃèÊö±êÊ¶µã
-    BD2_RN_BSQ,//ÃèÊö±êÊ¶Çø
-    BD2_RN_BSX,//ÃèÊö±êÊ¶Ïß
-    BD2_RN_COM,//ÉèÖÃÓÃ»§Éè±¸´®¿Ú
-    BD2_RN_DHV,//ËÙ¶ÈÀàµ¼º½ÐÅÏ¢
-    BD2_RN_GBS,//ÃèÊöGNSSÎÀÐÇ¹ÊÕÏ¼ì²â
-    BD2_RN_GGA,//ÃèÊö¶¨Î»Êý¾Ý
-    BD2_RN_GLL,//´óµØ×ø±ê¶¨Î»ÐÅÏ¢
-    BD2_RN_GLS,//ÉèÖÃÓÃ»§Éè±¸Î»ÖÃµÈ³õÊ¼»¯ÐÅÏ¢
-    BD2_RN_GSA,//ÉèÖÃÓÃ»§Éè±¸¹¤×÷Ä£Ê½µÈ
-    BD2_RN_GST,//ÃèÊöÎ±¾àÎó²îÍ³¼ÆÊý¾Ý
-    BD2_RN_GSV,//Êä³öÎÀÐÇÐÅÏ¢
-    BD2_RN_ICM,//Êä³öÓÃ»§Éè±¸ÖÐ¼Ó½âÃÜÄ£¿éÃÜÔ¿ÓÐÐ§ÆÚÐÅÏ¢
-    BD2_RN_IHI,//ÉèÖÃÓÃ»§Éè±¸Êä³öËÙ¶È¼ÓËÙ¶ÈµÈÐÅÏ¢
-    BD2_RN_IHO,//Êä³öµ¼º½¸¨ÖúÐÅÏ¢
-    BD2_RN_LPM,//ÉèÖÃÉè±¸¹¤×÷ÔÚÊ¡µçÄ£Ê½
-    BD2_RN_MSS,//ÉèÖÃÉè±¸µ±Ç°¶¨Î»·½Ê½
-    BD2_RN_PMU,//Êä³öPRMµÄÊ±Ð§²ÎÊýÐÅÏ¢
-    BD2_RN_RMC,//Êä³ö×î¼òµ¼º½´«ÊäÊý¾Ý
-    BD2_RN_TXT,//ÓÃÓÚ´«Êä¶ÌÎÄ±¾
-    BD2_RN_VTG,//ÃèÊöº½¼£ÏòºÍµØËÙ
-    BD2_RN_ZBS,//ÉèÖÃ×ø±êÏµ²ÎÊý
-    BD2_RN_ZDA,//ÃèÊöUTCÊ±¼ä¡¢ÈÕÆÚºÍ±¾µØÊ±Çø
-    BD2_RN_ZTI,//Êä³öÉè±¸µ±Ç°¹¤×÷×´Ì¬ÐÅÏ¢
+    BD2_RN_AAM = BD2_RN_ZERO,//ï¿½ï¿½Â·ï¿½ãµ½ï¿½ï±¨ï¿½ï¿½
+    BD2_RN_ALM,//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    BD2_RN_APL,//ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    BD2_RN_BSD,//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½
+    BD2_RN_BSQ,//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½
+    BD2_RN_BSX,//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½
+    BD2_RN_COM,//ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½è±¸ï¿½ï¿½ï¿½ï¿½
+    BD2_RN_DHV,//ï¿½Ù¶ï¿½ï¿½àµ¼ï¿½ï¿½ï¿½ï¿½Ï¢
+    BD2_RN_GBS,//ï¿½ï¿½ï¿½ï¿½GNSSï¿½ï¿½ï¿½Ç¹ï¿½ï¿½Ï¼ï¿½ï¿½
+    BD2_RN_GGA,//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½
+    BD2_RN_GLL,//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê¶¨Î»ï¿½ï¿½Ï¢
+    BD2_RN_GLS,//ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½è±¸Î»ï¿½ÃµÈ³ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ï¢
+    BD2_RN_GSA,//ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½è±¸ï¿½ï¿½ï¿½ï¿½Ä£Ê½ï¿½ï¿½
+    BD2_RN_GST,//ï¿½ï¿½ï¿½ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½Í³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    BD2_RN_GSV,//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+    BD2_RN_ICM,//ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½è±¸ï¿½Ð¼Ó½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½Ô¿ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½Ï¢
+    BD2_RN_IHI,//ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½è±¸ï¿½ï¿½ï¿½ï¿½Ù¶È¼ï¿½ï¿½Ù¶Èµï¿½ï¿½ï¿½Ï¢
+    BD2_RN_IHO,//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+    BD2_RN_LPM,//ï¿½ï¿½ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¡ï¿½ï¿½Ä£Ê½
+    BD2_RN_MSS,//ï¿½ï¿½ï¿½ï¿½ï¿½è±¸ï¿½ï¿½Ç°ï¿½ï¿½Î»ï¿½ï¿½Ê½
+    BD2_RN_PMU,//ï¿½ï¿½ï¿½PRMï¿½ï¿½Ê±Ð§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+    BD2_RN_RMC,//ï¿½ï¿½ï¿½ï¿½ï¿½òµ¼ºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    BD2_RN_TXT,//ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½
+    BD2_RN_VTG,//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½
+    BD2_RN_ZBS,//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½
+    BD2_RN_ZDA,//ï¿½ï¿½ï¿½ï¿½UTCÊ±ï¿½ä¡¢ï¿½ï¿½ï¿½ÚºÍ±ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+    BD2_RN_ZTI,//ï¿½ï¿½ï¿½ï¿½è±¸ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½Ï¢
     BD2_RN_LAST = BD2_RN_ZTI,
 #endif //PT_ENABLE_BD2_RN
-#ifdef PT_ENABLE_BD2_RD   //¶þ´úRDSSÐ­Òé
+#ifdef PT_ENABLE_BD2_RD   //ï¿½ï¿½ï¿½ï¿½RDSSÐ­ï¿½ï¿½
     BD2_RD_ZERO,
-    BD2_RD_BSI = BD2_RD_ZERO,//½ÓÊÕ²¨Êø×´Ì¬ÐÅÏ¢
-    BD2_RD_BSS,      //ÉèÖÃÏìÓ¦²¨ÊøºÍÊ±²î²¨Êø
-    BD2_RD_CXA,      //ÉèÖÃ²éÑ¯ÉêÇë
-    BD2_RD_DSA,      //ÉèÖÃ¶¨Ê±ÉêÇë
-    BD2_RD_DWA,      //ÉèÖÃ¶¨Î»ÉêÇë
-    BD2_RD_DWR,      //¶¨Î»ÐÅÏ¢
-    BD2_RD_FKI,      //ÓÃ»§Éè±¸·´À¡ÐÅÏ¢
-    BD2_RD_GXM,      //¹ÜÀíÐÅÏ¢ÉèÖÃ¡¢²éÑ¯
-    BD2_RD_ICA,      //ÉèÖÃ¼ì²â¼Ó½âÃÜÄ£¿é
-    BD2_RD_ICI,      //ÓÃ»§Éè±¸±¾»ú¼Ó½âÃÜÄ£¿éÐÅÏ¢
-    BD2_RD_ICZ,      //Ö¸»Ó»úÏÂÊôÓÃ»§ÐÅÏ¢
-    BD2_RD_JMS,      //ÎÞÏß¾²Ä¬ÉèÖÃ
-    BD2_RD_KLS,      //Ö¸»Ó»ú·¢ËÍ¿ÚÁîÊ¶±ðÖ¸Áî
-    BD2_RD_KLT,      //¿ÚÁîÊ¶±ðÓ¦´ð
-    BD2_RD_LZM,      //ÓÃ»§Éè±¸ÁãÖµ¹ÜÀí
-    BD2_RD_HZR,      //»ØÖ´ÐÅÏ¢
-    BD2_RD_TXA,      //ÉèÖÃÍ¨Ñ¶ÉêÇë
-    BD2_RD_TXR,      //Í¨Ñ¶ÐÅÏ¢
-    BD2_RD_WAA,      //ÉèÖÃ»ò½ÓÊÕÎ»ÖÃ±¨¸æ1µÄÎ»ÖÃÊý¾Ý
-    BD2_RD_WBA,      //ÉèÖÃÎ»ÖÃ±¨¸æ2ÉêÇë
-    BD2_RD_ZHS,      //ÉèÖÃ×Ô»Ù
+    BD2_RD_BSI = BD2_RD_ZERO,//ï¿½ï¿½ï¿½Õ²ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½Ï¢
+    BD2_RD_BSS,      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½î²¨ï¿½ï¿½
+    BD2_RD_CXA,      //ï¿½ï¿½ï¿½Ã²ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½
+    BD2_RD_DSA,      //ï¿½ï¿½ï¿½Ã¶ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
+    BD2_RD_DWA,      //ï¿½ï¿½ï¿½Ã¶ï¿½Î»ï¿½ï¿½ï¿½ï¿½
+    BD2_RD_DWR,      //ï¿½ï¿½Î»ï¿½ï¿½Ï¢
+    BD2_RD_FKI,      //ï¿½Ã»ï¿½ï¿½è±¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+    BD2_RD_GXM,      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ã¡ï¿½ï¿½ï¿½Ñ¯
+    BD2_RD_ICA,      //ï¿½ï¿½ï¿½Ã¼ï¿½ï¿½Ó½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
+    BD2_RD_ICI,      //ï¿½Ã»ï¿½ï¿½è±¸ï¿½ï¿½ï¿½ï¿½ï¿½Ó½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½Ï¢
+    BD2_RD_ICZ,      //Ö¸ï¿½Ó»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ï¢
+    BD2_RD_JMS,      //ï¿½ï¿½ï¿½ß¾ï¿½Ä¬ï¿½ï¿½ï¿½ï¿½
+    BD2_RD_KLS,      //Ö¸ï¿½Ó»ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½Ö¸ï¿½ï¿½
+    BD2_RD_KLT,      //ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½Ó¦ï¿½ï¿½
+    BD2_RD_LZM,      //ï¿½Ã»ï¿½ï¿½è±¸ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½
+    BD2_RD_HZR,      //ï¿½ï¿½Ö´ï¿½ï¿½Ï¢
+    BD2_RD_TXA,      //ï¿½ï¿½ï¿½ï¿½Í¨Ñ¶ï¿½ï¿½ï¿½ï¿½
+    BD2_RD_TXR,      //Í¨Ñ¶ï¿½ï¿½Ï¢
+    BD2_RD_WAA,      //ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã±ï¿½ï¿½ï¿½1ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    BD2_RD_WBA,      //ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã±ï¿½ï¿½ï¿½2ï¿½ï¿½ï¿½ï¿½
+    BD2_RD_ZHS,      //ï¿½ï¿½ï¿½ï¿½ï¿½Ô»ï¿½
     BD2_RD_LAST = BD2_RD_ZHS,
 #endif//PT_ENABLE_BD2_RD
-#ifdef PT_ENABLE_BD2_EXPRESS    //×¨ÓÃÓï¾ä
+#ifdef PT_ENABLE_BD2_EXPRESS    //×¨ï¿½ï¿½ï¿½ï¿½ï¿½
     BD2_EX_ZERO,
-    BD2_EX_ECS = BD2_EX_ZERO,      //ÉèÖÃÊä³öÔ­Ê¼µ¼º½ÐÅÏ¢
-    BD2_EX_ECT,      //Ô­Ê¼µ¼º½ÐÅÏ¢
-    BD2_EX_TCS,      //½ÓÊÕÍ¨µÀÇ¿ÖÆ¸ú×Ù
-    BD2_EX_IDV,      //¸ÉÈÅ¼ì²âÐÅÏ¢
-    BD2_EX_PRD,      //ÉèÖÃÓÃ»§Éè±¸Êä³öÎ±¾à¹Û²âÖµºÍÔØ²¨ÏàÎ»
-    BD2_EX_PRO,      //Ô­Ê¼Î±¾à¹Û²âÖµºÍÔØ²¨ÏàÎ»
-    BD2_EX_RIS,      //Éè±¸¸´Î»
-    BD2_EX_RMO,      //Êä³ö¼¤»î
-    BD2_EX_SCS,      //RDSSË«Í¨µÀÊ±²îÊý¾Ý
-	BD2_EX_TXM,		//Í¨ÐÅÉèÖÃ
-	BD2_EX_WGM,		//Íø¹ØÉèÖÃ
+    BD2_EX_ECS = BD2_EX_ZERO,      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+    BD2_EX_ECT,      //Ô­Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+    BD2_EX_TCS,      //ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½Ç¿ï¿½Æ¸ï¿½ï¿½ï¿½
+    BD2_EX_IDV,      //ï¿½ï¿½ï¿½Å¼ï¿½ï¿½ï¿½ï¿½Ï¢
+    BD2_EX_PRD,      //ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½è±¸ï¿½ï¿½ï¿½Î±ï¿½ï¿½Û²ï¿½Öµï¿½ï¿½ï¿½Ø²ï¿½ï¿½ï¿½Î»
+    BD2_EX_PRO,      //Ô­Ê¼Î±ï¿½ï¿½Û²ï¿½Öµï¿½ï¿½ï¿½Ø²ï¿½ï¿½ï¿½Î»
+    BD2_EX_RIS,      //ï¿½è±¸ï¿½ï¿½Î»
+    BD2_EX_RMO,      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    BD2_EX_SCS,      //RDSSË«Í¨ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	BD2_EX_TXM,		//Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	BD2_EX_WGM,		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     BD2_EX_LAST = BD2_EX_WGM,
 #endif// PT_ENABLE_BD2_EXPRESS
-#ifdef PT_ENABLE_BD2_SPECIAL//ÌØÊâÓï¾ä
+#ifdef PT_ENABLE_BD2_SPECIAL//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     BD2_SP_ZERO,
-    BD2_SP_XNF = BD2_SP_ZERO,      //ÓÃ»§Éè±¸½ÓÊÕ¹ßµ¼¸¨ÖúÐÅÏ¢¸ñÊ½
-    BD2_SP_XSD,      //Êä³öÏÂÊôÓÃ»§¶¨Î»ÐÅÏ¢ 
-    BD2_SP_XST,      //Êä³öÏÂÊôÓÃ»§Í¨Ñ¶ÐÅÏ¢
+    BD2_SP_XNF = BD2_SP_ZERO,      //ï¿½Ã»ï¿½ï¿½è±¸ï¿½ï¿½ï¿½Õ¹ßµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½Ê½
+    BD2_SP_XSD,      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Î»ï¿½ï¿½Ï¢ 
+    BD2_SP_XST,      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Í¨Ñ¶ï¿½ï¿½Ï¢
     BD2_SP_LAST = BD2_SP_XST,
 #endif// PT_ENABLE_BD2_SPECIAL
-#ifdef PT_ENABLE_NW//ÅµÎ¬×Ô¶¨ÒåÐ­Òé
+#ifdef PT_ENABLE_NW//ÅµÎ¬ï¿½Ô¶ï¿½ï¿½ï¿½Ð­ï¿½ï¿½
     NW_ZERO,
-    NW_KJD = NW_ZERO, //¿ª»úÎÕÊÖÖ¸Áî
-    NW_ICK,     //¿¨×ù×´Ì¬¿ØÖÆ
-    NW_ICS,     //ËùÓÐ¿¨×ùµÄ×´Ì¬
-    NW_ICQ,     //¶ÁÈ¡¿¨ÄÚÐÅÏ¢
-    NW_ICH,     //µ±Ç°¿¨µÄ»ù±¾ÐÅÏ¢
-    NW_JKD,     //½Ó¿ÚÇÐ»»
-	NW_LGN,     //Éè±¸µÇÂ¼Íø¹Ø
-    NW_WZR,     //Éè±¸Êä³öÎ»ÖÃÖÁ¿Í»§¶Ë
-    NW_WZI,     //Éè±¸ÉÏ±¨Î»ÖÃÖÁÆ½Ì¨
-	NW_WZQ,     //Æ½Ì¨²éÑ¯Éè±¸Î»ÖÃ
-	NW_STA,     //Éè±¸ÉÏ±¨×´Ì¬
-	NW_TXI,     //Æ½Ì¨ÓëÉè±¸¶ÌÐÅÍ¨ÐÅ
-	NW_FKS,     //Íø¹Ø·¢ËÍÖÁÉè±¸µÄÏìÓ¦	 ·þÎñÆ÷·¢¸øÒ»Ìå»ú
-    NW_FKD,     //Éè±¸·¢ËÍÖÁÍø¹ØµÄÏìÓ¦	 Ò»Ìå»ú·¢¸ø·þÎñÆ÷
-	NW_YDM,     //Íø¹Ø¿ØÖÆÖ¸Áî ¹Ø±Õ\½ÓÍ¨ÓÍµç  ·þÎñÆ÷·¢¸øÒ»Ìå»ú
-	NW_TXS,     //¿Í»§¶ËÉèÖÃÒ»Ìå»úÍ¨ÐÅ²ÎÊý
-    NW_HMM,     //Ôö¼Ó¡¢É¾³ýSOSºÅÂë
-    NW_HMQ,     //²éÑ¯SOSºÅÂë
-	NW_DXQ,     //²éÑ¯Éè±¸´æ´¢¶ÌÐÅ
-	NW_DBG,     //¹ÜÀíÉè±¸µ÷ÊÔÐÅÏ¢
-    NW_MSS,     //ÉèÖÃ¹¤×÷Ä£Ê½
-    NW_LAST = NW_MSS,//ÅµÎ¬×Ô¶¨ÒåÐ­Òé½áÊø
+    NW_KJD = NW_ZERO, //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½
+    NW_ICK,     //ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½
+    NW_ICS,     //ï¿½ï¿½ï¿½Ð¿ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
+    NW_ICQ,     //ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+    NW_ICH,     //ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+    NW_JKD,     //ï¿½Ó¿ï¿½ï¿½Ð»ï¿½
+	NW_LGN,     //ï¿½è±¸ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½
+    NW_WZR,     //ï¿½è±¸ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½
+    NW_WZI,     //ï¿½è±¸ï¿½Ï±ï¿½Î»ï¿½ï¿½ï¿½ï¿½Æ½Ì¨
+	NW_WZQ,     //Æ½Ì¨ï¿½ï¿½Ñ¯ï¿½è±¸Î»ï¿½ï¿½
+	NW_STA,     //ï¿½è±¸ï¿½Ï±ï¿½×´Ì¬
+	NW_TXI,     //Æ½Ì¨ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½
+	NW_FKS,     //ï¿½ï¿½ï¿½Ø·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½ï¿½Ó¦	 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½
+    NW_FKD,     //ï¿½è±¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½Ó¦	 Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	NW_YDM,     //ï¿½ï¿½ï¿½Ø¿ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ ï¿½Ø±ï¿½\ï¿½ï¿½Í¨ï¿½Íµï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½
+	NW_TXS,     //ï¿½Í»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Í¨ï¿½Å²ï¿½ï¿½ï¿½
+    NW_HMM,     //ï¿½ï¿½ï¿½Ó¡ï¿½É¾ï¿½ï¿½SOSï¿½ï¿½ï¿½ï¿½
+    NW_HMQ,     //ï¿½ï¿½Ñ¯SOSï¿½ï¿½ï¿½ï¿½
+	NW_DXQ,     //ï¿½ï¿½Ñ¯ï¿½è±¸ï¿½æ´¢ï¿½ï¿½ï¿½ï¿½
+	NW_DBG,     //ï¿½ï¿½ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+    NW_MSS,     //ï¿½ï¿½ï¿½Ã¹ï¿½ï¿½ï¿½Ä£Ê½
+    NW_LAST = NW_MSS,//ÅµÎ¬ï¿½Ô¶ï¿½ï¿½ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½
 #endif//PT_ENABLE_NW
-#ifdef PT_ENABLE_GPS//GPSÐ­Òé
+#ifdef PT_ENABLE_GPS//GPSÐ­ï¿½ï¿½
     GPS_ZERO,
-    GPS_GGA = GPS_ZERO,//È«Çò¶¨Î»Êý¾Ý
-    GPS_GSA,      //ÎÀÐÇPRNÊý¾Ý
-    GPS_GSV,      //ÎÀÐÇ×´Ì¬ÐÅÏ¢
-    GPS_RMC,      //ÔËÊä¶¨Î»Êý¾Ý
-    GPS_VTG,      //µØÃæËÙ¶ÈÐÅÏ¢
-    GPS_GLL,      //´óµØ×ø±êÊý¾Ý
-    GPS_ZDA,      //UTCÊ±¼äºÍÈÕÆÚ
+    GPS_GGA = GPS_ZERO,//È«ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½
+    GPS_GSA,      //ï¿½ï¿½ï¿½ï¿½PRNï¿½ï¿½ï¿½ï¿½
+    GPS_GSV,      //ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½Ï¢
+    GPS_RMC,      //ï¿½ï¿½ï¿½ä¶¨Î»ï¿½ï¿½ï¿½ï¿½
+    GPS_VTG,      //ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½ï¿½ï¿½Ï¢
+    GPS_GLL,      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    GPS_ZDA,      //UTCÊ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     GPS_LAST = GPS_ZDA,
 #endif//PT_ENABLE_GPS
-#ifdef PT_ENABLE_GT06//GPSÐ­Òé
+#ifdef PT_ENABLE_GT06//GPSÐ­ï¿½ï¿½
     GT06_ZERO,
-    GT06_LOGINREQ = GT06_ZERO,//µÇÂ¼ÇëÇó
-    GT06_LOGINRES,//µÇÂ¼ÏìÓ¦
-    GT06_POSITION, //¶¨Î»
-    GT06_STATEREQ,  //×´Ì¬ÐÅÏ¢ÇëÇó
-    GT06_STATERES,  //×´Ì¬ÐÅÏ¢ÏìÓ¦
-    GT06_CMDREQ,  //¿ØÖÆÖ¸Áî
-    GT06_CMDRES,  //¿ØÖÆÖ¸ÁîÏìÓ¦
-    GT06_PHOTO,  //ÉÏ´«Í¼Æ¬
+    GT06_LOGINREQ = GT06_ZERO,//ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½
+    GT06_LOGINRES,//ï¿½ï¿½Â¼ï¿½ï¿½Ó¦
+    GT06_POSITION, //ï¿½ï¿½Î»
+    GT06_STATEREQ,  //×´Ì¬ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
+    GT06_STATERES,  //×´Ì¬ï¿½ï¿½Ï¢ï¿½ï¿½Ó¦
+    GT06_CMDREQ,  //ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½
+    GT06_CMDRES,  //ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Ó¦
+    GT06_PHOTO,  //ï¿½Ï´ï¿½Í¼Æ¬
     GT06_LAST = GT06_PHOTO,
 #endif//PT_ENABLE_GPS
 #ifdef PT_ENABLE_JT808
     JT808_ZERO,
-    JT808_TERMINALRES = JT808_ZERO,//ÖÕ¶ËÍ¨ÓÃÓ¦´ð¡Ì
-    JT808_PLATFORMRES,//Æ½Ì¨Í¨ÓÃÓ¦´ð¡Ì
-    JT808_KEEPALIVE,//ÖÕ¶ËÐÄÌø¡Ì
-    JT808_REGISTERREQ,//ÖÕ¶Ë×¢²á¡Ì©–
-    JT808_REGISTERRES,//ÖÕ¶Ë×¢²áÓ¦´ð¡Ì
-    JT808_DEREGISTER,//ÖÕ¶Ë×¢Ïû¡Ì
-    JT808_LOGIN,//ÖÕ¶Ë¼øÈ¨¡Ì
-    JT808_PARAMETET_SET,//ÉèÖÃÖÕ¶Ë²ÎÊý¡Ì©–
-    JT808_PARAMETER_QUERYREQ,//²éÑ¯ÖÕ¶Ë²ÎÊý¡Ì
-    JT808_PARAMETER_QUERYRES,//²éÑ¯ÖÕ¶Ë²ÎÊýÓ¦´ð¡Ì
-    JT808_TERMINALCTRL,//ÖÕ¶Ë¿ØÖÆ¡Ì
-    JT808_POSITION_REPORT,//Î»ÖÃÐÅÏ¢»ã±¨¡Ì©–
-    JT808_POSITION_QUERYREQ,//Î»ÖÃÐÅÏ¢²éÑ¯¡Ì
-    JT808_POSITION_QUERYRES,//Î»ÖÃÐÅÏ¢²éÑ¯Ó¦´ð¡Ì
-    JT808_POSITION_TRACK,//ÁÙÊ±Î»ÖÃ¸ú×Ù¡Ì
-    JT808_TEXT_NOTICE,//ÎÄ±¾ÏÂ·¢¡Ì
-    JT808_EVENT_SET,//ÊÂ¼þÉèÖÃ¡Ì
-    JT808_EVENT_REPORT,//ÊÂ¼þ±¨¸æ¡Ì
-    JT808_QUESTION_REQ,//ÌáÎÊÏÂ·¢¡Ì  
-    JT808_QUESTION_RES,//ÌáÎÊÓ¦´ð¡Ì
-    JT808_SERVICE_SET,//ÏûÏ¢µã²¥²Ëµ¥ÉèÖÃ¡Ì
-    JT808_SERVICE_OPT,//ÐÅÏ¢µã²¥/È¡Ïû¡Ì
-    JT808_SERVICE_INFO,//ÐÅÏ¢·þÎñ¡Ì
-    JT808_PHONECALLBACK,//µç»°»Ø²¦¡Ì
-    JT808_PHONEBOOK,//ÉèÖÃµç»°±¾¡Ì
-    JT808_CAR_CTRLREQ,//³µÁ¾¿ØÖÆ¡Ì
-    JT808_CAR_CTRLRES,//³µÁ¾¿ØÖÆÓ¦´ð¡Ì
-    JT808_REGION_CIRCLE_SET,//ÉèÖÃÔ²ÐÎÇøÓò¡Ì
-    JT808_REGION_CIRCLE_REMOVE,//É¾³ýÔ²ÐÎÇøÓò¡Ì
-    JT808_REGION_RECT_SET,//ÉèÖÃ¾ØÐÎÇøÓò¡Ì
-    JT808_REGION_RECT_REMOVE,//É¾³ý¾ØÐÎÇøÓò¡Ì
-    JT808_REGION_POLYGON_SET,//ÉèÖÃ¶à±ßÐÎÇøÓò¡Ì
-    JT808_REGION_POLYGON_REMOVE,//É¾³ý¶à±ßÐÎÇøÓò¡Ì
-    JT808_ROUTE_SET,//ÉèÖÃÂ·Ïß¡Ì
-    JT808_ROUTE_REMOVE,//É¾³ýÂ·Ïß¡Ì
-    JT808_DRIVINGRECORDER_REQ,//ÐÐÊ»¼ÇÂ¼ÒÇÊý¾Ý²É¼¯ÃüÁî¡Ì
-    JT808_DRIVINGRECORDER_RES,//ÐÐÊ»¼ÇÂ¼ÒÇÊý¾ÝÉÏ´«¡Ì
-    JT808_DRIVINGRECORDER_PARAM,  //ÐÐÊ»¼ÇÂ¼ÒÇ²ÎÊýÏÂ´«ÃüÁî¡Ì
-    JT808_ORDER_REPORT,              //µç×ÓÔËµ¥ÉÏ±¨¡Ì
-    JT808_DRIVERINFO_REPORT,         //¼ÝÊ»Ô±Éí·ÝÐÅÏ¢²É¼¯ÉÏ±¨¡Ì©–
-    JT808_MULTIMEDIA_EVENT_REPORT,//¶àÃ½ÌåÊÂ¼þÐÅÏ¢ÉÏ´«¡Ì
-    JT808_MULTIMEDIA_DATA_UPLOADREQ,//¶àÃ½ÌåÊý¾ÝÉÏ´«¡Ì
-    JT808_MULTIMEDIA_DATA_UPLOADRES,//¶àÃ½ÌåÊý¾ÝÉÏ´«Ó¦´ð¡Ì
-    JT808_CAMERA_CTRL,//ÉãÏñÍ·ÅÄÉãÖ¸Áî¿ØÖÆ
-    JT808_MULTIMEDIA_DATA_QUERYREQ,//´æ´¢¶àÃ½ÌåÊý¾Ý¼ìË÷
-    JT808_MULTIMEDIA_DATA_QUERYRES,//´æ´¢¶àÃ½ÌåÊý¾Ý¼ìË÷Ó¦´ð
-    JT808_MULTIMEDIA_DATA_UPLOADCMD,//´æ´¢¶àÃ½ÌåÊý¾ÝÉÏ´«ÃüÁî
-    JT808_RECORDER_CTRL,//Â¼ÒôÃüÁî¿ªÊ¼/Í£Ö¹¡Ì
-    JT808_DATA_DOWNLOAD,//Êý¾ÝÏÂÐÐÍ¸´«¡Ì
-    JT808_DATA_UPLOAD,//Êý¾ÝÉÏÐÐÍ¸´«¡Ì
-    JT808_DATA_GZIP_UPLOAD,//Êý¾ÝÑ¹ËõÉÏ±¨¡Ì
-    JT808_PLATFORM_RAS,//Æ½Ì¨RAS¹«Ô¿¡Ì
-    JT808_TERMINAL_RAS,//ÖÕ¶ËRAS¹«Ô¿¡Ì
-    JT808_MULTIPOSITION,//¶àÓÃ»§Î»ÖÃÉÏ±¨,×Ô¶¨ÒåÐ­Òé¡Ì
-    JT808_SENSOR_REPORT,//´«¸ÐÆ÷Êý¾ÝÉÏ´«¡Ì
-    JT808_SENSOR_QUERYREQ,//´«¸ÐÆ÷Êý¾Ý²éÑ¯ÇëÇó¡Ì
-    JT808_SENSOR_QUERYRES,//´«¸ÐÆ÷Êý¾Ý²éÑ¯·´À¡¡Ì
-	JT808_SEND_AGAINREQ,//²¹´«·Ö°üÇëÇó¡Ì  VER_201301
-	JT808_SPECIFY_PARAM_QUERYREQ,//²éÑ¯Ö¸¶¨ÖÕ¶Ë²ÎÊý¡Ì
-	JT808_PROPERTY_QUERYREQ,//²éÑ¯ÖÕ¶ËÊôÐÔ¡Ì
-	JT808_PROPERTY_QUERYRES,//²éÑ¯ÖÕ¶ËÊôÐÔÓ¦´ð¡Ì
-	JT808_UPDATE_PACKAGEREQ,//ÏÂ·¢ÖÕ¶ËÉý¼¶°ü¡Ì
-	JT808_UPDATE_PACKAGERES,//ÖÕ¶ËÉý¼¶½á¹ûÍ¨Öª¡Ì
-	JT808_WARM_MANAGE,//ÈË¹¤È·ÈÏ±¨¾¯ÏûÏ¢¡Ì
-	JT808_DRIVERINFO_REPORTREQ,//ÉÏ±¨¼ÝÊ»Ô±Éí·ÝÐÅÏ¢ÇëÇó¡Ì
-	JT808_POSDATA_UPLOAD,//¶¨Î»Êý¾ÝÅúÁ¿ÉÏ´«¡Ì
-	JT808_CAN_DATA_UPLOAD,//CAN×ÜÏßÊý¾ÝÉÏ´«
-	JT808_CAMERA_CTRL_RES,//ÉãÏñÍ·Á¢¼´ÅÄÉãÃüÁîÓ¦´ð
-	JT808_ONE_MULTIMEDIA_DATA_QUERYREQ,//µ¥Ìõ´æ´¢¶àÃ½ÌåÊý¾Ý¼ìË÷ÉÏ´«ÃüÁî
-    JT808_DEVICE_UNLOCK,//Ê¹ÓÃÇ°½âËø
+    JT808_TERMINALRES = JT808_ZERO,//ï¿½Õ¶ï¿½Í¨ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½
+    JT808_PLATFORMRES,//Æ½Ì¨Í¨ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½
+    JT808_KEEPALIVE,//ï¿½Õ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    JT808_REGISTERREQ,//ï¿½Õ¶ï¿½×¢ï¿½ï¿½Ì©ï¿½
+    JT808_REGISTERRES,//ï¿½Õ¶ï¿½×¢ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½
+    JT808_DEREGISTER,//ï¿½Õ¶ï¿½×¢ï¿½ï¿½ï¿½ï¿½
+    JT808_LOGIN,//ï¿½Õ¶Ë¼ï¿½È¨ï¿½ï¿½
+    JT808_PARAMETET_SET,//ï¿½ï¿½ï¿½ï¿½ï¿½Õ¶Ë²ï¿½ï¿½ï¿½ï¿½Ì©ï¿½
+    JT808_PARAMETER_QUERYREQ,//ï¿½ï¿½Ñ¯ï¿½Õ¶Ë²ï¿½ï¿½ï¿½ï¿½ï¿½
+    JT808_PARAMETER_QUERYRES,//ï¿½ï¿½Ñ¯ï¿½Õ¶Ë²ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½
+    JT808_TERMINALCTRL,//ï¿½Õ¶Ë¿ï¿½ï¿½Æ¡ï¿½
+    JT808_POSITION_REPORT,//Î»ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ã±¨ï¿½Ì©ï¿½
+    JT808_POSITION_QUERYREQ,//Î»ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½Ñ¯ï¿½ï¿½
+    JT808_POSITION_QUERYRES,//Î»ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½Ñ¯Ó¦ï¿½ï¿½ï¿½
+    JT808_POSITION_TRACK,//ï¿½ï¿½Ê±Î»ï¿½Ã¸ï¿½ï¿½Ù¡ï¿½
+    JT808_TEXT_NOTICE,//ï¿½Ä±ï¿½ï¿½Â·ï¿½ï¿½ï¿½
+    JT808_EVENT_SET,//ï¿½Â¼ï¿½ï¿½ï¿½ï¿½Ã¡ï¿½
+    JT808_EVENT_REPORT,//ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    JT808_QUESTION_REQ,//ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½  
+    JT808_QUESTION_RES,//ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½
+    JT808_SERVICE_SET,//ï¿½ï¿½Ï¢ï¿½ã²¥ï¿½Ëµï¿½ï¿½ï¿½ï¿½Ã¡ï¿½
+    JT808_SERVICE_OPT,//ï¿½ï¿½Ï¢ï¿½ã²¥/È¡ï¿½ï¿½ï¿½ï¿½
+    JT808_SERVICE_INFO,//ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½
+    JT808_PHONECALLBACK,//ï¿½ç»°ï¿½Ø²ï¿½ï¿½ï¿½
+    JT808_PHONEBOOK,//ï¿½ï¿½ï¿½Ãµç»°ï¿½ï¿½ï¿½ï¿½
+    JT808_CAR_CTRLREQ,//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¡ï¿½
+    JT808_CAR_CTRLRES,//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½
+    JT808_REGION_CIRCLE_SET,//ï¿½ï¿½ï¿½ï¿½Ô²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    JT808_REGION_CIRCLE_REMOVE,//É¾ï¿½ï¿½Ô²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    JT808_REGION_RECT_SET,//ï¿½ï¿½ï¿½Ã¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    JT808_REGION_RECT_REMOVE,//É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    JT808_REGION_POLYGON_SET,//ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    JT808_REGION_POLYGON_REMOVE,//É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    JT808_ROUTE_SET,//ï¿½ï¿½ï¿½ï¿½Â·ï¿½ß¡ï¿½
+    JT808_ROUTE_REMOVE,//É¾ï¿½ï¿½Â·ï¿½ß¡ï¿½
+    JT808_DRIVINGRECORDER_REQ,//ï¿½ï¿½Ê»ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½Ý²É¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    JT808_DRIVINGRECORDER_RES,//ï¿½ï¿½Ê»ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½
+    JT808_DRIVINGRECORDER_PARAM,  //ï¿½ï¿½Ê»ï¿½ï¿½Â¼ï¿½Ç²ï¿½ï¿½ï¿½ï¿½Â´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    JT808_ORDER_REPORT,              //ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½Ï±ï¿½ï¿½ï¿½
+    JT808_DRIVERINFO_REPORT,         //ï¿½ï¿½Ê»Ô±ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½É¼ï¿½ï¿½Ï±ï¿½ï¿½Ì©ï¿½
+    JT808_MULTIMEDIA_EVENT_REPORT,//ï¿½ï¿½Ã½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½Ï¢ï¿½Ï´ï¿½ï¿½ï¿½
+    JT808_MULTIMEDIA_DATA_UPLOADREQ,//ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½
+    JT808_MULTIMEDIA_DATA_UPLOADRES,//ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½Ó¦ï¿½ï¿½ï¿½
+    JT808_CAMERA_CTRL,//ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½
+    JT808_MULTIMEDIA_DATA_QUERYREQ,//ï¿½æ´¢ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¼ï¿½ï¿½ï¿½
+    JT808_MULTIMEDIA_DATA_QUERYRES,//ï¿½æ´¢ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¼ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½
+    JT808_MULTIMEDIA_DATA_UPLOADCMD,//ï¿½æ´¢ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ï¿½ï¿½
+    JT808_RECORDER_CTRL,//Â¼ï¿½ï¿½ï¿½ï¿½ï¿½î¿ªÊ¼/Í£Ö¹ï¿½ï¿½
+    JT808_DATA_DOWNLOAD,//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ï¿½ï¿½ï¿½
+    JT808_DATA_UPLOAD,//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ï¿½ï¿½ï¿½
+    JT808_DATA_GZIP_UPLOAD,//ï¿½ï¿½ï¿½ï¿½Ñ¹ï¿½ï¿½ï¿½Ï±ï¿½ï¿½ï¿½
+    JT808_PLATFORM_RAS,//Æ½Ì¨RASï¿½ï¿½Ô¿ï¿½ï¿½
+    JT808_TERMINAL_RAS,//ï¿½Õ¶ï¿½RASï¿½ï¿½Ô¿ï¿½ï¿½
+    JT808_MULTIPOSITION,//ï¿½ï¿½ï¿½Ã»ï¿½Î»ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½Ô¶ï¿½ï¿½ï¿½Ð­ï¿½ï¿½ï¿½
+    JT808_SENSOR_REPORT,//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½
+    JT808_SENSOR_QUERYREQ,//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý²ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½
+    JT808_SENSOR_QUERYRES,//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý²ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	JT808_SEND_AGAINREQ,//ï¿½ï¿½ï¿½ï¿½ï¿½Ö°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  VER_201301
+	JT808_SPECIFY_PARAM_QUERYREQ,//ï¿½ï¿½Ñ¯Ö¸ï¿½ï¿½ï¿½Õ¶Ë²ï¿½ï¿½ï¿½ï¿½ï¿½
+	JT808_PROPERTY_QUERYREQ,//ï¿½ï¿½Ñ¯ï¿½Õ¶ï¿½ï¿½ï¿½ï¿½Ô¡ï¿½
+	JT808_PROPERTY_QUERYRES,//ï¿½ï¿½Ñ¯ï¿½Õ¶ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½
+	JT808_UPDATE_PACKAGEREQ,//ï¿½Â·ï¿½ï¿½Õ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	JT808_UPDATE_PACKAGERES,//ï¿½Õ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨Öªï¿½ï¿½
+	JT808_WARM_MANAGE,//ï¿½Ë¹ï¿½È·ï¿½Ï±ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½
+	JT808_DRIVERINFO_REPORTREQ,//ï¿½Ï±ï¿½ï¿½ï¿½Ê»Ô±ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½
+	JT808_POSDATA_UPLOAD,//ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½
+	JT808_CAN_DATA_UPLOAD,//CANï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½
+	JT808_CAMERA_CTRL_RES,//ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½
+	JT808_ONE_MULTIMEDIA_DATA_QUERYREQ,//ï¿½ï¿½ï¿½ï¿½ï¿½æ´¢ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¼ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ï¿½ï¿½
+    JT808_DEVICE_UNLOCK,//Ê¹ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½
 	JT808_LAST,
 
 #endif //PT_ENABLE_JT808
 #ifdef PT_ENABLE_JT808_DV
     JT808_DV_ZERO,
-    JT808_DV_POWERON = JT808_DV_ZERO,  //ÉÏµçÖ¸Ê¾£¬Í¨ÓÃÏûÏ¢
-    JT808_DV_LINKCHECK,//Á´Â·¼ì²â£¬Í¨ÓÃÏûÏ¢
-    JT808_DV_POWERCTRL,//µçÔ´¿ØÖÆ£¬Í¨ÓÃÏûÏ¢
-    JT808_DV_VERSION,  //ÍâÉè°æ±¾¼ì²â£¬Í¨ÓÃÏûÏ¢
-    JT808_DV_SELFCHECK, //ÍâÉè×Ô¼ì£¬Í¨ÓÃÏûÏ¢
-    JT808_DV_LIVEUPDATE,//ÍâÉè¹Ì¼þÉý¼¶£¬Í¨ÓÃÏûÏ¢
-    JT808_DV_IC_AUTHENTICATE,  //ICÈÏÖ¤ÇëÇó/Ó¦´ð
-    JT808_DV_IC_READRESULT, //IC¶ÁÈ¡½á¹ûÇëÇó/Ó¦´ð
-    JT808_DV_IC_PULLOUT, //IC°Î³öÍ¨Öª/Ó¦´ð
-    JT808_DV_IC_READ, //ICÖ÷¶¯´¥·¢¶ÁÈ¡ÇëÇó/Ó¦´ð
-    JT808_DV_POSITION, //ÍâÉè¶¨Î»Êý¾Ý,×Ô¶¨ÒåÏûÏ¢
-    JT808_DV_PARAM, //ÍâÉè²ÎÊý,×Ô¶¨ÒåÏûÏ¢
+    JT808_DV_POWERON = JT808_DV_ZERO,  //ï¿½Ïµï¿½Ö¸Ê¾ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½Ï¢
+    JT808_DV_LINKCHECK,//ï¿½ï¿½Â·ï¿½ï¿½â£¬Í¨ï¿½ï¿½ï¿½ï¿½Ï¢
+    JT808_DV_POWERCTRL,//ï¿½ï¿½Ô´ï¿½ï¿½ï¿½Æ£ï¿½Í¨ï¿½ï¿½ï¿½ï¿½Ï¢
+    JT808_DV_VERSION,  //ï¿½ï¿½ï¿½ï¿½æ±¾ï¿½ï¿½â£¬Í¨ï¿½ï¿½ï¿½ï¿½Ï¢
+    JT808_DV_SELFCHECK, //ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ì£¬Í¨ï¿½ï¿½ï¿½ï¿½Ï¢
+    JT808_DV_LIVEUPDATE,//ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½Ï¢
+    JT808_DV_IC_AUTHENTICATE,  //ICï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½/Ó¦ï¿½ï¿½
+    JT808_DV_IC_READRESULT, //ICï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½/Ó¦ï¿½ï¿½
+    JT808_DV_IC_PULLOUT, //ICï¿½Î³ï¿½Í¨Öª/Ó¦ï¿½ï¿½
+    JT808_DV_IC_READ, //ICï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½/Ó¦ï¿½ï¿½
+    JT808_DV_POSITION, //ï¿½ï¿½ï¿½è¶¨Î»ï¿½ï¿½ï¿½ï¿½,ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+    JT808_DV_PARAM, //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
     JT808_DV_LAST,
 #endif //PT_ENABLE_JT808_DV
 }TProtocolType;
 
 /*
-*º¯ÊýÃû³Æ£ºPT_InitLib
-*º¯ÊýËµÃ÷£º³õÊ¼»¯Ð­Òé¿â
-*²ÎÊýËµÃ÷£ºÎÞ
-*·µ»ØÖµ£º  ÎÞ
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_InitLib
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½Ð­ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  ï¿½ï¿½
 */
 void  PT_InitLib(void);
 
 /*
-*º¯ÊýÃû³Æ£ºPT_Initialize
-*º¯ÊýËµÃ÷£º³õÊ¼»¯Ð­ÒéÕ»²ÎÊý
-*²ÎÊýËµÃ÷£ºnStackType Ð­ÒéÕ»ÀàÐÍ
-*·µ»ØÖµ£º  -1 ±íÊ¾Ð­ÒéÕ»Êý²»×ã£¬ÆäËû±íÊ¾Õ»ID
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_Initialize
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½Ð­ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½nStackType Ð­ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  -1 ï¿½ï¿½Ê¾Ð­ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½ã£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾Õ»ID
 */
 int  PT_Initialize(int nStackType);
 /*
-*º¯ÊýÃû³Æ£ºPT_InitializeEx
-*º¯ÊýËµÃ÷£º³õÊ¼»¯Ð­ÒéÕ»²ÎÊý
-*²ÎÊýËµÃ÷£ºpParam Ð­Òé½ÓÊÕÕ»Ö¸Õë
-*·µ»ØÖµ£º  -1 ±íÊ¾Ê§°Ü£¬ÆäËû³É¹¦
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_InitializeEx
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½Ð­ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½pParam Ð­ï¿½ï¿½ï¿½ï¿½ï¿½Õ»Ö¸ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  -1 ï¿½ï¿½Ê¾Ê§ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½
 */
 int  PT_InitializeEx(TStackParam *pParam);
 
 /*
-*º¯ÊýÃû³Æ£ºPT_Uninitialize
-*º¯ÊýËµÃ÷£ºÊÍ·ÅÐ­ÒéÕ»
-*²ÎÊýËµÃ÷£ºnStackID Õ»ID
-*·µ»ØÖµ£º  ÎÞ
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_Uninitialize
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½Ð­ï¿½ï¿½Õ»
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½nStackID Õ»ID
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  ï¿½ï¿½
 */
 void PT_Uninitialize(int nStackID);
 /*
-*º¯ÊýÃû³Æ£ºPT_UninitializeEx
-*º¯ÊýËµÃ÷£ºÊÍ·ÅÐ­ÒéÕ»
-*²ÎÊýËµÃ÷£ºpParam Ð­Òé½ÓÊÕÕ»Ö¸Õë
-*·µ»ØÖµ£º  ÎÞ
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_UninitializeEx
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½Ð­ï¿½ï¿½Õ»
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½pParam Ð­ï¿½ï¿½ï¿½ï¿½ï¿½Õ»Ö¸ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  ï¿½ï¿½
 */
 void PT_UninitializeEx(TStackParam *pParam);
 
 /*
-*º¯ÊýÃû³Æ£ºPT_GetRecvData
-*º¯ÊýËµÃ÷£º»ñÈ¡½ÓÊÕ»º´æµÄÊý¾Ý
-*²ÎÊýËµÃ÷£ºlpBuff   Êý¾Ý»º´æÖ¸Õë
-*          nBuffLen Êý¾Ý»º´æ³¤¶È
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_GetRecvData
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½lpBuff   ï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½
+*          nBuffLen ï¿½ï¿½ï¿½Ý»ï¿½ï¿½æ³¤ï¿½ï¿½
 *          nStackID Õ»ID
-*·µ»ØÖµ£º  0 ±íÊ¾½âÂë³É¹¦£¬ÆäËû±íÊ¾Ê§°Ü
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  0 ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾Ê§ï¿½ï¿½
 */
 int PT_GetRecvData(uchar *lpBuff, int nBuffLen, int nStackID);
 
 /*
-*º¯ÊýÃû³Æ£ºPT_RecvData
-*º¯ÊýËµÃ÷£º½âÂë½ÓÊÕµÄÊý¾ÝÖÁÐ­ÒéÊý¾Ý½á¹¹
-*²ÎÊýËµÃ÷£ºnStackID Õ»ID
-*          data     ½ÓÊÕµÄÊý¾Ý
-*·µ»ØÖµ£º  -1 ±íÊ¾Ã»ÓÐÊÕµ½ÕûÖ¡Êý¾Ý£¬ÆäËû±íÊ¾Ëù½ÓÊÕÖ¡Êý¾ÝµÄÏûÏ¢ÀàÐÍ
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_RecvData
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½Ý½á¹¹
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½nStackID Õ»ID
+*          data     ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  -1 ï¿½ï¿½Ê¾Ã»ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½Ýµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
 */
 int  PT_RecvData(int nStackID, uchar data);
 
 /*
-*º¯ÊýÃû³Æ£ºPT_RecvDataEx
-*º¯ÊýËµÃ÷£º½âÂë½ÓÊÕµÄÊý¾ÝÖÁÐ­ÒéÊý¾Ý½á¹¹
-*²ÎÊýËµÃ÷£ºpParam Ð­Òé½ÓÊÕÕ»Ö¸Õë
-*          data     ½ÓÊÕµÄÊý¾Ý
-*·µ»ØÖµ£º  -1 ±íÊ¾Ã»ÓÐÊÕµ½ÕûÖ¡Êý¾Ý£¬ÆäËû±íÊ¾Ëù½ÓÊÕÖ¡Êý¾ÝµÄÏûÏ¢ÀàÐÍ
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_RecvDataEx
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½Ý½á¹¹
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½pParam Ð­ï¿½ï¿½ï¿½ï¿½ï¿½Õ»Ö¸ï¿½ï¿½
+*          data     ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  -1 ï¿½ï¿½Ê¾Ã»ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½Ýµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
 */
 int  PT_RecvDataEx(TStackParam *pParam, uchar data);
 
 
 /*
-*º¯ÊýÃû³Æ£ºPT_DecodeRecvData
-*º¯ÊýËµÃ÷£º½âÂëÐ­ÒéÕ»½ÓÊÕµÄÊý¾ÝÖÁÐ­ÒéÊý¾Ý½á¹¹
-*²ÎÊýËµÃ÷£ºpPackage ½á¹¹ÌåÖ¸Õë
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_DecodeRecvData
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½Õ»ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½Ý½á¹¹
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½pPackage ï¿½á¹¹ï¿½ï¿½Ö¸ï¿½ï¿½
 *          nStackID Õ»ID
-*·µ»ØÖµ£º  0 ±íÊ¾½âÂë³É¹¦£¬ÆäËû±íÊ¾Ê§°Ü
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  0 ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾Ê§ï¿½ï¿½
 */
 int PT_DecodeRecvData(void *pPackage, int nStackID);
 
 /*
-*º¯ÊýÃû³Æ£ºPT_DecodeRecvDataEx
-*º¯ÊýËµÃ÷£º½âÂëÐ­ÒéÕ»½ÓÊÕµÄÊý¾ÝÖÁÐ­ÒéÊý¾Ý½á¹¹
-*²ÎÊýËµÃ÷£ºpPackage ½á¹¹ÌåÖ¸Õë
-*          pParam Ð­Òé½ÓÊÕÕ»Ö¸Õë
-*·µ»ØÖµ£º  0 ±íÊ¾½âÂë³É¹¦£¬ÆäËû±íÊ¾Ê§°Ü
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_DecodeRecvDataEx
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½Õ»ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½Ý½á¹¹
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½pPackage ï¿½á¹¹ï¿½ï¿½Ö¸ï¿½ï¿½
+*          pParam Ð­ï¿½ï¿½ï¿½ï¿½ï¿½Õ»Ö¸ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  0 ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾Ê§ï¿½ï¿½
 */
 int PT_DecodeRecvDataEx(void *pPackage, TStackParam *pParam);
 
 /*
-*º¯ÊýÃû³Æ£ºPT_DecodeType
-*º¯ÊýËµÃ÷£º½âÂë½ÓÊÕµ½ÕûÖ¡Êý¾ÝµÄÏûÏ¢ÀàÐÍ
-*²ÎÊýËµÃ÷£ºbuf    ½ÓÊÕÊý¾Ý»º´æ
-*          len    ½ÓÊÕÊý¾Ý³¤¶È
-*          nStackType Ð­ÒéÕ»ÀàÐÍ 
-*·µ»ØÖµ£º  -1 ±íÊ¾ÎÞÐ§µÄÏûÏ¢ÀàÐÍ£¬ÆäËû±íÊ¾½âÎöµÄÀàÐÍ
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_DecodeType
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½Ýµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½buf    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½
+*          len    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý³ï¿½ï¿½ï¿½
+*          nStackType Ð­ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ 
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  -1 ï¿½ï¿½Ê¾ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 */
 int PT_DecodeType(const uchar* lpBuff, int nBuffLen, int nStackType);
 
 /*
-*º¯ÊýÃû³Æ£ºPT_DecodePackage
-*º¯ÊýËµÃ÷£º½âÂë½ÓÊÕÕûÖ¡Êý¾ÝÖÁÐ­ÒéÊý¾Ý½á¹¹
-*²ÎÊýËµÃ÷£ºpPackage  Êý¾Ý½á¹¹Ö¸Õë
-*          lpBuff    Êý¾Ý»º´æ
-*          nBuffLen  Êý¾Ý»º´æ³¤¶È
-*          nStackType Ð­ÒéÕ»ÀàÐÍ
-*·µ»ØÖµ£º  0 ±íÊ¾½âÂë³É¹¦£¬ÆäËû±íÊ¾Ê§°Ü
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_DecodePackage
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½Ý½á¹¹
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½pPackage  ï¿½ï¿½ï¿½Ý½á¹¹Ö¸ï¿½ï¿½
+*          lpBuff    ï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½
+*          nBuffLen  ï¿½ï¿½ï¿½Ý»ï¿½ï¿½æ³¤ï¿½ï¿½
+*          nStackType Ð­ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  0 ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾Ê§ï¿½ï¿½
 */
 int PT_DecodePackage(void *pPackage, uchar *lpBuff, int nBuffLen, int nStackType);
 
 /*
-*º¯ÊýÃû³Æ£ºPT_EncodePackage
-*º¯ÊýËµÃ÷£º±àÂëÊý¾Ý
-*²ÎÊýËµÃ÷£ºlpBuff    Êý¾Ý»º´æ
-*          nBuffLen  Êý¾Ý»º´æ³¤¶È
-*          pMsgData  Ð­ÒéÊý¾Ý½á¹¹Ö¸Õë
-*          bDevice   ÊÇ·ñÉè±¸Õ»£¬Éè±¸Õ»¶þ´úÐ­ÒéÍ·±àÂë"BD"ÓÃ1±íÊ¾£¬PCÕ»±àÂë"CC"ÓÃ0±íÊ¾
-*·µ»ØÖµ£º  -1 ±íÊ¾Ê§°Ü£¬ÆäËû±íÊ¾Êý¾Ý³¤¶È
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_EncodePackage
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½lpBuff    ï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½
+*          nBuffLen  ï¿½ï¿½ï¿½Ý»ï¿½ï¿½æ³¤ï¿½ï¿½
+*          pMsgData  Ð­ï¿½ï¿½ï¿½ï¿½ï¿½Ý½á¹¹Ö¸ï¿½ï¿½
+*          bDevice   ï¿½Ç·ï¿½ï¿½è±¸Õ»ï¿½ï¿½ï¿½è±¸Õ»ï¿½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½"BD"ï¿½ï¿½1ï¿½ï¿½Ê¾ï¿½ï¿½PCÕ»ï¿½ï¿½ï¿½ï¿½"CC"ï¿½ï¿½0ï¿½ï¿½Ê¾
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  -1 ï¿½ï¿½Ê¾Ê§ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ý³ï¿½ï¿½ï¿½
 */
 int PT_EncodePackage(uchar *lpBuff, int nBuffLen, 
                        void *pPackage, int nType, char bDevice);
 
 #ifdef WIN32
 /*
-*º¯ÊýÃû³Æ£ºPT_GetPackage
-*º¯ÊýËµÃ÷£º¸ù¾ÝÏûÏ¢ÀàÐÍ»ñÈ¡ÏàÓ¦µÄÊý¾Ý½á¹¹°ü,´Ëº¯Êý½öÊÊÓÃÓÚWIN32Æ½Ì¨
-*²ÎÊýËµÃ÷£ºnType ÏûÏ¢ÀàÐÍ
-*·µ»ØÖµ£º  NULL ±íÊ¾ÎÞ´ËÀàÐÍÊý¾Ý½á¹¹°ü£¬ÆäËû±íÊ¾Êý¾Ý½á¹¹°üÖ¸Õë£¬½á¹¹Êý¾Ý°üÊ¹ÓÃÍêºóÓ¦Ê¹ÓÃfreeÊÍ·Å
+*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PT_GetPackage
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Í»ï¿½È¡ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½Ý½á¹¹ï¿½ï¿½,ï¿½Ëºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½WIN32Æ½Ì¨
+*ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½nType ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
+*ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½  NULL ï¿½ï¿½Ê¾ï¿½Þ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý½á¹¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ý½á¹¹ï¿½ï¿½Ö¸ï¿½ë£¬ï¿½á¹¹ï¿½ï¿½ï¿½Ý°ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦Ê¹ï¿½ï¿½freeï¿½Í·ï¿½
 */
 void* PT_GetPackage(int nType);
 
