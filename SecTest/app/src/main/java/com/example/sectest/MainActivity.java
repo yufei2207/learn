@@ -3,6 +3,10 @@ package com.example.sectest;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
+import java.io.UnsupportedEncodingException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,20 +20,78 @@ public class MainActivity extends AppCompatActivity {
         tv.setText(stringFromJNI());
 
         int test_a = addJNI(2,3);
-        String RcvBuf = "$BDICI,2097151,00000000,2097151,0,9999.0,0,N,0*25\r\n";
-        int test_b = PTDecodeTypeJNI(RcvBuf);
+        String rcvBuf = "$BDICI,2097151,00000000,2097151,0,9999.0,0,N,0*25\r\n";
+        //int test_b = PTDecodeTypeJNI(rcvBuf);
 
-        TrdICI trdICI = new TrdICI();
-        int test_ICI = PTDecodePackageICIJNI(trdICI,RcvBuf);
+        //TrdICI trdICI = new TrdICI();
+        //int test_ICI = PTDecodePackageICIJNI(trdICI,rcvBuf);
+
+        Map objectTrd = PTDecodePackage(rcvBuf);
+//        int bbb = objectTrd.nUserID;
+        //TrdICI trdICI = new TrdICI();
+        //int test_ICI = PTDecodePackageICIJNI(trdICI,RcvBuf);
         //TrdICI test_ICA = PTDecodePackageICIJNI2(trdICI,RcvBuf);
         int ddd = 1;
         ddd = ddd+1;
+    }
+
+    public Map<String,String> PTDecodePackage(String rcvBuf){
+        //rcvBuf = "$BDICI,2097151,00000000,2097151,0,9999.0,0,N,0*25\r\n";
+        int nType = - 1;
+        Map<String, String> map = new HashMap();
+        nType = PTDecodeTypeJNI(rcvBuf);
+        switch (nType){
+            case 10:{
+                TrdICI trdObj = new TrdICI();
+                int test_ICI = PTDecodePackageICIJNI(trdObj,rcvBuf);
+                map.put("nUserID",String.valueOf(trdObj.nUserID));
+                map.put("nSerialNum",String.valueOf(trdObj.nSerialNum));
+                map.put("nBrdID",String.valueOf(trdObj.nBrdID));
+                map.put("nUserType",String.valueOf(trdObj.nUserType));
+                map.put("f_Freq",String.valueOf(trdObj.f_Freq));
+                map.put("nCommLevel",String.valueOf(trdObj.nCommLevel));
+                map.put("cEncryptFlag",String.valueOf(trdObj.cEncryptFlag));
+                map.put("nSubuserNum",String.valueOf(trdObj.nSubuserNum));
+            }
+            case 11:{
+
+                break;
+            }
+            case 18:{
+
+                break;
+            }
+            case 7:{
+
+                break;
+            }
+            case 1:{
+
+                break;
+            }
+            case 19:{
+
+                break;
+            }
+            case 16:{
+
+                break;
+            }
+            case 6:{
+
+                break;
+            }
+            default:
+                break;
+        }
+        return map;
     }
 
     /**
      * A native method that is implemented by the 'native-lib' native library,
      * which is packaged with this application.
      */
+
     public native String stringFromJNI();
     public native int addJNI(int a, int b);
     public native int PTDecodeTypeJNI(String rcvBuf);
@@ -195,6 +257,7 @@ public class MainActivity extends AppCompatActivity {
         protected char cHeightUnit;
     };
     public native int PTDecodePackageWAAJNI(TrdWAA trdObj,String rcvBuf);
+
 
     // Used to load the 'native-lib' library on application startup.
     static {
