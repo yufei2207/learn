@@ -4,6 +4,40 @@
 //#include "./utility/utility.h"
 #include "./protocol/pt_config.h"
 
+
+
+enum  WM_SF_OUTCMD
+{
+    WM_SF_OUTCMD_NUL =0,
+    WM_SF_OUTCMD_BSS = 1,//  波束设置
+    WM_SF_OUTCMD_BSIO ,//  打开波束功率
+    WM_SF_OUTCMD_BSIC ,//  关闭波束功率
+    WM_SF_OUTCMD_CXA ,//  查询申请
+    WM_SF_OUTCMD_DSA ,//  定时申请
+    WM_SF_OUTCMD_DWA ,//  定位申请
+    WM_SF_OUTCMD_TXA ,//  通信申请
+
+    WM_SF_OUTCMD_ICA ,//  模块保密模块信息检测
+    WM_SF_OUTCMD_GXM ,//  管理信息读取
+    WM_SF_OUTCMD_LZMREAD ,// 零值读取
+    WM_SF_OUTCMD_LZMSET ,//  零值设置
+    WM_SF_OUTCMD_PKY ,//  PKY加注
+
+    WM_SF_OUTCMD_ZTA ,//  模块自检
+    WM_SF_OUTCMD_RMO ,//  请求语句
+    WM_SF_OUTCMD_SBX ,//  模块信息
+    WM_SF_OUTCMD_KLS ,//  口令识别
+    WM_SF_OUTCMD_JMS ,//  静默设置
+    WM_SF_OUTCMD_JMQ ,//  静默设置
+    WM_SF_OUTCMD_ZHS ,//  自毁设置
+    WM_SF_OUTCMD_RIS ,//  复位设置
+    WM_SF_OUTCMD_GBS ,//  永久关闭设置
+
+    WM_SF_OUTCMD_UPPOS ,//  上传位置
+
+};
+
+
 int jstringToChar(JNIEnv* env, jstring jstr, uchar* rtn) {
     jclass clsstring = env->FindClass("java/lang/String");
     jstring strencode = env->NewStringUTF("GB2312");
@@ -18,6 +52,125 @@ int jstringToChar(JNIEnv* env, jstring jstr, uchar* rtn) {
     }
     env->ReleaseByteArrayElements(barr, ba, 0);
     return alen;
+}
+
+
+
+//=========================================================================================================
+//int  byType;  // 2=打开波束功率 3=WM_SF_OUTCMD_BSIC 15=模块信息
+//int   nMode;   // 输出模式
+//int   nFreq;   // 输出频度
+extern "C" JNIEXPORT jstring JNICALL
+Java_com_example_sectest_MainActivity_EncodeSFCmdRMOJNI(
+        JNIEnv* env,
+        jobject ,
+        jint byType,
+        jint nMode,
+        jint nFreq
+)
+{
+    bool bValid = true;
+    uchar SendBuf[128] = {0};
+    uchar checkSum = 0;
+    int nLen = 0;
+
+    if (bValid)
+    {
+        if (nMode > 2)
+        {
+            nLen = sprintf((char *)SendBuf, "$CCRMO,,%d,%d*",nMode, nFreq);
+        }
+        else
+        {
+            switch(byType)
+            {
+                case WM_SF_OUTCMD_BSIO:
+                    nLen = sprintf((char *)SendBuf, "$CCRMO,%s,%d,%d*","BSI",nMode, nFreq);
+                    break;
+                case WM_SF_OUTCMD_BSIC:
+                    nLen = sprintf((char *)SendBuf, "$CCRMO,%s,%d,%d*","BSI",nMode, nFreq);
+                    break;
+                case WM_SF_OUTCMD_SBX:
+                    nLen = sprintf((char *)SendBuf, "$CCRMO,%s,%d,%d*","SBX",nMode, nFreq);
+                    break;
+                default:
+                    break;
+            }
+
+        }
+        if (nLen > 2)
+        {
+            for (int i = 1; i < nLen; i++)
+            {
+                checkSum ^= SendBuf[i];
+            }
+            nLen += sprintf((char *)(SendBuf + nLen), "%02X", checkSum);
+        }
+    }
+
+    std::string s ;
+    for(int i=0; i<nLen; i++){
+        s.append(1,SendBuf[i]);
+    }
+    if(nLen>2){
+        return env->NewStringUTF(s.c_str());
+    }
+
+    return env->NewStringUTF("");
+}
+
+// 波束设置
+//int   byXYBSID; // 响应波束ID
+//int   bySCBSID; // 时差波束
+extern "C" JNIEXPORT jstring JNICALL
+Java_com_example_sectest_MainActivity_EncodeSFCmdBSSJNI(
+        JNIEnv* env,
+        jobject ,
+        jint byXYBSID,
+        jint bySCBSID
+)
+{
+    bool bValid = true;
+    uchar SendBuf[128] = {0};
+    uchar checkSum = 0;
+    int nLen = 0;
+
+    if (bValid)
+    {
+        if (byXYBSID == 0 && bySCBSID == 0)
+        {
+            nLen = sprintf((char *)SendBuf, "$CCBSS,,*");
+        }
+        else if (bySCBSID == 0)
+        {
+            nLen = sprintf((char *)SendBuf, "$CCBSS,%d,*",byXYBSID);
+        }
+        else if (byXYBSID == 0)
+        {
+            nLen = sprintf((char *)SendBuf, "$CCBSS,,%d*",bySCBSID);
+        }
+        else
+            nLen = sprintf((char *)SendBuf, "$CCBSS,%02d,%02d*",byXYBSID, bySCBSID);
+
+        if (nLen > 2)
+        {
+            for (int i = 1; i < nLen; i++)
+            {
+                checkSum ^= SendBuf[i];
+            }
+            nLen += sprintf((char *)(SendBuf + nLen), "%02X", checkSum);
+        }
+    }
+
+    std::string s ;
+    for(int i=0; i<nLen; i++){
+        s.append(1,SendBuf[i]);
+    }
+    if(nLen>2){
+        return env->NewStringUTF(s.c_str());
+    }
+
+    return env->NewStringUTF("");
 }
 
 extern "C" JNIEXPORT jstring JNICALL
@@ -175,6 +328,40 @@ Java_com_example_sectest_MainActivity_PTEncodePackageTXAJNI(
     std::string s ;
     for(int i=0; i<nLen; i++){
         s[i] = SendBuf[i];
+    }
+    if(nLen>0){
+        return env->NewStringUTF(s.c_str());
+    }
+
+    return env->NewStringUTF("");
+}
+
+//CXA,2代RDSS输入协议，查询本机通信信息
+//查询类别（0:定位查询,1:通信查询）
+//uchar nQueryType;
+//查询方式（1-3）
+//uchar nQueryMode;
+//用户地址（ID号）
+//int nUserID;
+extern "C" JNIEXPORT jstring JNICALL
+Java_com_example_sectest_MainActivity_PTEncodePackageCXAJNI(
+        JNIEnv* env,
+        jobject ,
+        jint nUserID,
+        jint nQueryType,
+        jint nQueryMode
+) {
+    TRDCXA pkg;
+    uchar SendBuf[50] = {0};
+
+    pkg.nUserID = nUserID;
+    pkg.nQueryType = nQueryType;
+    pkg.nQueryMode = nQueryMode;
+
+    int nLen = PT_EncodePackage(SendBuf, 50, &pkg, BD2_RD_CXA, 0);
+    std::string s ;
+    for(int i=0; i<nLen-2; i++){
+        s.append(1,SendBuf[i]);
     }
     if(nLen>0){
         return env->NewStringUTF(s.c_str());
@@ -393,10 +580,17 @@ Java_com_example_sectest_MainActivity_PTDecodePackageICZJNI(
     fid = env->GetFieldID( clazz, "nSubuserNum", "I");
     env->SetIntField( trdObj, fid, pkg.nSubuserNum);
 
-    //TODO:: 暂时不知道数组怎么处理.
-    //fid =env->GetFieldID( clazz, "nSubuserID", "I");
-    //jstring name = env->NewStringUTF(env, pkg.nPower);
-    //env->SetObjectField(trdObj, fid, name);
+    int arrayLength=sizeof(pkg.nSubuserID)/sizeof(pkg.nSubuserID[0]);
+    std::string strs;
+    for(int i=0;i<arrayLength;i++)
+    {
+        if(i != 0){ strs += ",";}
+        int temp=pkg.nSubuserID[i];
+        strs += std::to_string(temp);
+    }
+    fid =env->GetFieldID( clazz, "nSubuserID", "Ljava/lang/String;");
+    jstring cCmdName = env->NewStringUTF(strs.c_str());
+    env->SetObjectField(trdObj, fid, cCmdName);
 
     return nType;
 }
@@ -583,20 +777,50 @@ Java_com_example_sectest_MainActivity_PTDecodePackageHZRJNI(
     fid = env->GetFieldID( clazz, "nHZNum", "C");
     env->SetCharField( trdObj, fid, pkg.nHZNum);
 
-//    fid =env->GetFieldID( clazz, "SendTimeHour", "[I");
-//    std::string s ;
-//    for(int i=0; i<4; i++){
-//        s[i] = pkg.cCmdName[i];
-//    }
-//    jstring cCmdName = env->NewStringUTF(s.c_str());
-//    env->SetObjectField(trdObj, fid, cCmdName);
+    std::string strs;
+    for(int i=0;i<5;i++)
+    {
+        if(i != 0){ strs += ",";}
+        int temp=pkg.SendTime[i].nHour;
+        strs += std::to_string(temp);
+    }
+    fid =env->GetFieldID( clazz, "SendTimeHour", "Ljava/lang/String;");
+    jstring cCmdName = env->NewStringUTF(strs.c_str());
+    env->SetObjectField(trdObj, fid, cCmdName);
 
-    //TODO::同上数组暂时没有处理
-    //int SendTimeHour[5];
-    //int SendTimeMinute[5];
-    //回执时间（时分）
-    //int RespTimeHour[5];
-    //int RespTimeMinute[5];
+    strs = "";
+    for(int i=0;i<5;i++)
+    {
+        if(i != 0){ strs += ",";}
+        int temp=pkg.SendTime[i].nMinute;
+        strs += std::to_string(temp);
+    }
+    fid =env->GetFieldID( clazz, "SendTimeMinute", "Ljava/lang/String;");
+    cCmdName = env->NewStringUTF(strs.c_str());
+    env->SetObjectField(trdObj, fid, cCmdName);
+
+    strs = "";
+    for(int i=0;i<5;i++)
+    {
+        if(i != 0){ strs += ",";}
+        int temp=pkg.RespTime[i].nHour;
+        strs += std::to_string(temp);
+    }
+    fid =env->GetFieldID( clazz, "RespTimeHour", "Ljava/lang/String;");
+    cCmdName = env->NewStringUTF(strs.c_str());
+    env->SetObjectField(trdObj, fid, cCmdName);
+
+    strs = "";
+    for(int i=0;i<5;i++)
+    {
+        if(i != 0){ strs += ",";}
+        int temp=pkg.RespTime[i].nMinute;
+        strs += std::to_string(temp);
+    }
+    fid =env->GetFieldID( clazz, "RespTimeMinute", "Ljava/lang/String;");
+    cCmdName = env->NewStringUTF(strs.c_str());
+    env->SetObjectField(trdObj, fid, cCmdName);
+
     return nType;
 }
 

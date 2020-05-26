@@ -40,50 +40,168 @@ public class MainActivity extends AppCompatActivity {
         int nType = - 1;
         Map<String, String> map = new HashMap();
         nType = PTDecodeTypeJNI(rcvBuf);
+        map.put("nTrdType", String.valueOf(nType));
+
         switch (nType){
-            case 10:{
+            case SSD.BD2_RD_BSI:
+            {
+                TrdBSI trdObj = new TrdBSI();
+                int decType = PTDecodePackageBSIJNI(trdObj,rcvBuf);
+                if(decType >= 0) {
+                    map.put("nInboudBeam", String.valueOf(trdObj.nInboudBeam));
+                    map.put("nTmDifBeam", String.valueOf(trdObj.nTmDifBeam));
+                    map.put("nPower", String.valueOf(trdObj.nPower));
+                }
+            }
+            break;
+            case SSD.BD2_RD_BSS:
+                break;
+            case SSD.BD2_RD_CXA:
+                break;
+            case SSD.BD2_RD_DSA:
+                break;
+            case SSD.BD2_RD_DWA:
+                break;
+            case SSD.BD2_RD_DWR:
+            {
+                TrdDWR trdObj = new TrdDWR();
+                int decType = PTDecodePackageDWRJNI(trdObj,rcvBuf);
+                if(decType >= 0) {
+                    map.put("nPosType", String.valueOf(trdObj.nPosType));
+                    map.put("nUserID", String.valueOf(trdObj.nUserID));
+                    map.put("nHour", String.valueOf(trdObj.nHour));
+                    map.put("nMinute", String.valueOf(trdObj.nMinute));
+                    map.put("f_Second", String.valueOf(trdObj.f_Second));
+                    map.put("db_Lat", String.valueOf(trdObj.db_Lat));
+                    map.put("cLatDir", String.valueOf(trdObj.cLatDir));
+                    map.put("db_Lon", String.valueOf(trdObj.db_Lon));
+
+                    map.put("cLonDir", String.valueOf(trdObj.cLonDir));
+                    map.put("db_Height", String.valueOf(trdObj.db_Height));
+                    map.put("cHunit", String.valueOf(trdObj.cHunit));
+                    map.put("f_Kesi", String.valueOf(trdObj.f_Kesi));
+                    map.put("cKesiUnit", String.valueOf(trdObj.cKesiUnit));
+                    map.put("nPrecision", String.valueOf(trdObj.nPrecision));
+                    map.put("cUrgencyPos", String.valueOf(trdObj.cUrgencyPos));
+                    map.put("cMutilpleValue", String.valueOf(trdObj.cMutilpleValue));
+                    map.put("cLocaType", String.valueOf(trdObj.cLocaType));
+                }
+            }
+            break;
+            case SSD.BD2_RD_FKI:
+            {
+                TrdFKI trdObj = new TrdFKI();
+                int decType = PTDecodePackageFKIJNI(trdObj,rcvBuf);
+                if(decType >= 0) {
+                    map.put("cCmdName", String.valueOf(trdObj.cCmdName));
+                    map.put("cCmdExecFlag", String.valueOf(trdObj.cCmdExecFlag));
+                    map.put("cFreqSetFlag", String.valueOf(trdObj.cFreqSetFlag));
+                    map.put("nRestrainFlag", String.valueOf(trdObj.nRestrainFlag));
+                    map.put("nWaitHour", String.valueOf(trdObj.nWaitHour));
+                    map.put("nWaitSecond", String.valueOf(trdObj.nWaitSecond));
+                }
+            }
+            break;
+            case SSD.BD2_RD_GXM:
+                break;
+            case SSD.BD2_RD_ICA:
+                break;
+            case SSD.BD2_RD_ICI:
+            {
                 TrdICI trdObj = new TrdICI();
-                int test_ICI = PTDecodePackageICIJNI(trdObj,rcvBuf);
-                map.put("nUserID",String.valueOf(trdObj.nUserID));
-                map.put("nSerialNum",String.valueOf(trdObj.nSerialNum));
-                map.put("nBrdID",String.valueOf(trdObj.nBrdID));
-                map.put("nUserType",String.valueOf(trdObj.nUserType));
-                map.put("f_Freq",String.valueOf(trdObj.f_Freq));
-                map.put("nCommLevel",String.valueOf(trdObj.nCommLevel));
-                map.put("cEncryptFlag",String.valueOf(trdObj.cEncryptFlag));
-                map.put("nSubuserNum",String.valueOf(trdObj.nSubuserNum));
+                int decType = PTDecodePackageICIJNI(trdObj,rcvBuf);
+                if(decType >= 0) {
+                    map.put("nUserID", String.valueOf(trdObj.nUserID));
+                    map.put("nSerialNum", String.valueOf(trdObj.nSerialNum));
+                    map.put("nBrdID", String.valueOf(trdObj.nBrdID));
+                    map.put("nUserType", String.valueOf(trdObj.nUserType));
+                    map.put("f_Freq", String.valueOf(trdObj.f_Freq));
+                    map.put("nCommLevel", String.valueOf(trdObj.nCommLevel));
+                    map.put("cEncryptFlag", String.valueOf(trdObj.cEncryptFlag));
+                    map.put("nSubuserNum", String.valueOf(trdObj.nSubuserNum));
+                }
             }
-            case 11:{
-
+            break;
+            case SSD.BD2_RD_ICZ:
+            {
+                TrdICZ trdObj = new TrdICZ();
+                int decType = PTDecodePackageICZJNI(trdObj,rcvBuf);
+                if(decType >= 0) {
+                    map.put("nSubuserNum", String.valueOf(trdObj.nSubuserNum));
+                    map.put("nSubuserID", String.valueOf(trdObj.nSubuserID));
+                }
+            }
+            break;
+            case SSD.BD2_RD_JMS:
                 break;
-            }
-            case 18:{
-
+            case SSD.BD2_RD_KLS:
                 break;
-            }
-            case 7:{
-
+            case SSD.BD2_RD_KLT:
                 break;
-            }
-            case 1:{
-
+            case SSD.BD2_RD_LZM:
                 break;
-            }
-            case 19:{
+            case SSD.BD2_RD_HZR:
+            {
+                TrdHZR trdObj = new TrdHZR();
+                int decType = PTDecodePackageHZRJNI(trdObj,rcvBuf);
+                if(decType >= 0) {
+                    map.put("nUserID", String.valueOf(trdObj.nUserID));
+                    map.put("nHZNum", String.valueOf(trdObj.nHZNum));
 
-                break;
+                    map.put("SendTimeHour", String.valueOf(trdObj.SendTimeHour));
+                    map.put("SendTimeMinute", String.valueOf(trdObj.SendTimeMinute));
+                    map.put("RespTimeHour", String.valueOf(trdObj.RespTimeHour));
+                    map.put("RespTimeMinute", String.valueOf(trdObj.RespTimeMinute));
+                }
             }
-            case 16:{
+            break;
+            case SSD.BD2_RD_TXA:
+                break;
+            case SSD.BD2_RD_TXR:
+            {
+                TrdTXR trdObj = new TrdTXR();
+                int decType = PTDecodePackageTXRJNI(trdObj,rcvBuf);
+                if(decType >= 0) {
+                    map.put("nMsgType", String.valueOf(trdObj.nMsgType));
+                    map.put("nUserID", String.valueOf(trdObj.nUserID));
+                    map.put("szUserID", String.valueOf(trdObj.szUserID));
+                    map.put("nInfoType", String.valueOf(trdObj.nInfoType));
+                    map.put("nSendHour", String.valueOf(trdObj.nSendHour));
+                    map.put("nSendMin", String.valueOf(trdObj.nSendMin));
+                    map.put("nInfolen", String.valueOf(trdObj.nInfolen));
+                    map.put("Info", String.valueOf(trdObj.Info));
+                }
+            }
+            break;
+            case SSD.BD2_RD_WAA:
+            {
+                TrdWAA trdObj = new TrdWAA();
+                int decType = PTDecodePackageWAAJNI(trdObj,rcvBuf);
+                if(decType >= 0) {
+                    map.put("nMsgType", String.valueOf(trdObj.nMsgType));
+                    map.put("f_Freq", String.valueOf(trdObj.f_Freq));
+                    map.put("nUserID", String.valueOf(trdObj.nUserID));
+                    map.put("nReportHour", String.valueOf(trdObj.nReportHour));
+                    map.put("nReportMin", String.valueOf(trdObj.nReportMin));
+                    map.put("f_ReportSecond", String.valueOf(trdObj.f_ReportSecond));
 
-                break;
+                    map.put("f_Lat", String.valueOf(trdObj.f_Lat));
+                    map.put("cLatAspect", String.valueOf(trdObj.cLatAspect));
+                    map.put("f_Lon", String.valueOf(trdObj.f_Lon));
+                    map.put("cLonAspect", String.valueOf(trdObj.cLonAspect));
+                    map.put("f_Height", String.valueOf(trdObj.f_Height));
+                    map.put("cHeightUnit", String.valueOf(trdObj.cHeightUnit));
+                }
             }
-            case 6:{
-
+            break;
+            case SSD.BD2_RD_WBA:
                 break;
-            }
+            case SSD.BD2_RD_ZHS:
+                break;
             default:
                 break;
         }
+
         return map;
     }
 
@@ -139,7 +257,7 @@ public class MainActivity extends AppCompatActivity {
         //总下属用户数
         protected int nSubuserNum;
         //下属用户ID号（一包协议最多有40个）
-        //protected int nSubuserID[40];
+        protected String nSubuserID;
     };
     //TODO::此方法还没有处理完成,后面待处理
     public native int PTDecodePackageICZJNI(TrdICZ trdObj,String rcvBuf);
@@ -222,11 +340,11 @@ public class MainActivity extends AppCompatActivity {
         //回执数（0-5 0：无回执）
         protected char nHZNum;
         //发信时间（时分）
-        //protected int SendTimeHour[5];
-        //protected int SendTimeMinute[5];
+        protected String SendTimeHour;
+        protected String SendTimeMinute;
         //回执时间（时分）
-        //protected int RespTimeHour[5];
-        //protected int RespTimeMinute[5];
+        protected String RespTimeHour;
+        protected String RespTimeMinute;
     };
     //TODO::此方法还没有处理完成,后面待处理
     public native int PTDecodePackageHZRJNI(TrdHZR trdObj,String rcvBuf);
